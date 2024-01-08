@@ -21,13 +21,11 @@ header .inner {
   height: 120px;
   margin: 0 auto;
   background-color: orange;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 header .logo {
   height: 75px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  margin: auto;
 }
