@@ -36,3 +36,12 @@ window.addEventListener(
     }
   }, 300)
 );
+
+const fadeEls = document.querySelectorAll('.visual .fade-in');
+
+fadeEls.forEach((fadeEl, index) => {
+  gsap.to(fadeEl, 1, {
+    delay: (index + 1) * 0.7,
+    opacity: 1,
+  });
+});

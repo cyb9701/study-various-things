@@ -279,3 +279,6 @@ section.visual .spoon {
   bottom: 0px;
   left: 275px;
 }
+section.visual .fade-in {
+  opacity: 0;
+}
