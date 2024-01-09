@@ -24,6 +24,7 @@ header {
   background-color: #f6f5f0;
   border-bottom: 1px solid #c8c8c8;
   position: fixed;
+  top: 0;
   width: 100%;
 }
 header > .inner {
@@ -111,8 +112,6 @@ header .main-menu {
   right: 0;
   z-index: 1;
 }
-header .main-menu .item {
-}
 header .main-menu .item .item__name {
   padding: 10px 20px 34px 20px;
   font-family: Arial, sans-serif;
@@ -169,6 +168,8 @@ header .main-menu .item .item__contents .contents__texture p {
   color: #669900;
   margin: 4px 0 14px;
 }
+
+/* badges */
 header .badges {
   position: absolute;
   top: 132px;
@@ -180,4 +181,28 @@ header .badges .badge {
   margin-bottom: 12px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+}
+
+/* visual */
+section.visual {
+  margin-top: 120px;
+  background-image: url('./images/visual_bg.jpg');
+  background-position: center;
+}
+section.visual .inner {
+  height: 646px;
+}
+section.visual .title {
+}
+section.visual .title .btn {
+}
+section.visual .cup1.image {
+}
+section.visual .cup1.text {
+}
+section.visual .cup2.image {
+}
+section.visual .cup2.text {
+}
+section.visual .spoon {
 }
