@@ -282,3 +282,39 @@ section.visual .spoon {
 section.visual .fade-in {
   opacity: 0;
 }
+
+/* notice */
+section.notice {
+}
+section.notice .notice-line {
+  position: relative;
+}
+section.notice .notice-line .bg-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #333;
+}
+section.notice .notice-line .bg-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #f6f5ef;
+}
+section.notice .notice-line .inner {
+  height: 62px;
+  display: flex;
+}
+section.notice .notice-line .inner__left {
+  width: 60%;
+  height: 100%;
+  background-color: #333;
+}
+section.notice .notice-line .inner__right {
+  width: 40%;
+  height: 100%;
+}
