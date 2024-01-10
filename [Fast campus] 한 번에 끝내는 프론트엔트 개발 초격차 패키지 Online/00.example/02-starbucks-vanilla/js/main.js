@@ -60,7 +60,7 @@ new Swiper('.promotion .swiper-container', {
   spaceBetween: 10,
   centeredSlides: true,
   loop: true,
-  pagenation: {
+  pagination: {
     el: '.promotion .swiper-pagination',
     clickable: true,
   },
@@ -68,4 +68,22 @@ new Swiper('.promotion .swiper-container', {
     prevEl: '.promotion .swiper-prev',
     nextEl: '.promotion .swiper-next',
   },
+});
+
+const promotionEl = document.querySelector('.promotion');
+// 슬라이드 영역를 토글하는 버튼 검색!
+const promotionToggleBtn = document.querySelector('.toggle-promotion');
+// 슬라이드 영역 숨김 여부 기본값!
+let isHidePromotion = false;
+// 토글 버튼을 클릭하면,
+promotionToggleBtn.addEventListener('click', function () {
+  // 슬라이드 영역 숨김 여부를 반댓값으로 할당!
+  isHidePromotion = !isHidePromotion;
+  // 요소를 숨겨야 하면,
+  if (isHidePromotion) {
+    promotionEl.classList.add('hide');
+    // 요소가 보여야 하면,
+  } else {
+    promotionEl.classList.remove('hide');
+  }
 });
