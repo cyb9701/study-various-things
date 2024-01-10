@@ -313,8 +313,50 @@ section.notice .notice-line .inner__left {
   width: 60%;
   height: 100%;
   background-color: #333;
+  display: flex;
+  align-items: center;
+}
+section.notice .notice-line .inner__left h2 {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  margin-right: 20px;
+}
+section.notice .notice-line .inner__left .swiper-container {
+  height: 62px;
+  background-color: orange;
+  flex-grow: 1;
+}
+section.notice .notice-line .inner__left .notice-line__more {
+  width: 62px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.notice .notice-line .inner__left .notice-line__more .material-icons {
+  color: #fff;
+  font-size: 30px;
 }
 section.notice .notice-line .inner__right {
   width: 40%;
   height: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+section.notice .notice-line .inner__right h2 {
+  font-size: 17px;
+  font-weight: 700;
+}
+section.notice .notice-line .inner__right .toggle-promotion {
+  width: 62px;
+  height: 62px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section.notice .notice-line .inner__right .toggle-promotion .material-icons {
+  font-size: 30px;
 }
