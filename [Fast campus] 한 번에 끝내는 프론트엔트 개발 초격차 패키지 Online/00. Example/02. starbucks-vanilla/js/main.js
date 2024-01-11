@@ -128,3 +128,6 @@ new Swiper('.awards .swiper-container', {
     nextEl: '.awards .swiper-next',
   },
 });
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear();
