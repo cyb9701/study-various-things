@@ -117,3 +117,14 @@ spyEls.forEach(function (spyEl) {
     .setClassToggle(spyEl, 'show') // 요소가 화면에 보이면 show 클래스 추가
     .addTo(new ScrollMagic.Controller()); // 컨트롤러에 장면을 할당(필수!)
 });
+
+new Swiper('.awards .swiper-container', {
+  spaceBetween: 30,
+  autoplay: true,
+  loop: true,
+  slidesPerView: 5,
+  navigation: {
+    prevEl: '.awards .swiper-prev',
+    nextEl: '.awards .swiper-next',
+  },
+});
