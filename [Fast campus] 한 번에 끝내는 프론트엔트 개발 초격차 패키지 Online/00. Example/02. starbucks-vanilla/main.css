@@ -824,3 +824,21 @@ footer .copyright {
 footer .logo {
   margin: 30px auto 0;
 }
+
+/* to top button */
+#to-top {
+  background-color: #333;
+  color: #fff;
+  position: fixed;
+  width: 42px;
+  height: 42px;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  z-index: 9;
+  cursor: pointer;
+}
