@@ -2,8 +2,8 @@
  * Variable 선언하기
  *
  * 1) var - 더 이상 쓰지 않는다.
- * 2) let
- * 3) const
+ * 2) let - 업데이트될 수 있지만, 재선언은 불가능하다.
+ * 3) const - 업데이트도, 재선언도 불가능하다.
  */
 var name = '코드팩토리';
 console.log(name);
