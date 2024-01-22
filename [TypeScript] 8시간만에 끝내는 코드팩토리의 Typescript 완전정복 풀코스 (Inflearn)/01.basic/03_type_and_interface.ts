@@ -12,7 +12,7 @@ type NewNullType = null;
 type NewNumberType = number;
 type MaleOrFemale = 'male' | 'female';
 
-const newStringVar: NewStringType = 'new string';
+const stringVar: NewStringType = 'new string';
 
 type IdolType = {
   name: string;
