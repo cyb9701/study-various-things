@@ -1,7 +1,6 @@
 /**
  * Function Type
  */
-
 const runner = () => {
   return ['person1', 'person2', 'person3'].map((x) => {
     return `사람: ${x}`;
