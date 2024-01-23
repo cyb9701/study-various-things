@@ -35,7 +35,7 @@ const multiplyTwoNumbers2: InterfaceMultiplyTwoNumbers = (x, y) => {
 interface A {
   (input: number): number;
 }
-const a: A = (input) => {
+const aVariable: A = (input) => {
   return input;
 };
 
