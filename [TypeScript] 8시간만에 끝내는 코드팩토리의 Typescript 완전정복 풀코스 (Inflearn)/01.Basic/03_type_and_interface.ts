@@ -55,7 +55,6 @@ const yuJin4 = {
 /**
  * Function in Interface
  */
-
 interface A {
   (input: number): number;
 }
