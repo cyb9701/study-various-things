@@ -51,3 +51,24 @@ interface IdolOptional {
 const yuJin4 = {
   name: '안유진',
 };
+
+/**
+ * Function in Interface
+ */
+
+interface A {
+  (input: number): number;
+}
+
+interface B {
+  (input1: number): number;
+  (input2: number): number;
+}
+
+interface C {
+  c: (input: number) => number;
+}
+
+interface D {
+  d(input: number): number;
+}
