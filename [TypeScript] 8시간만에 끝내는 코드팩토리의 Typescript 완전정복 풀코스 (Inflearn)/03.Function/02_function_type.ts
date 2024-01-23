@@ -29,3 +29,26 @@ interface InterfaceMultiplyTwoNumbers {
 const multiplyTwoNumbers2: InterfaceMultiplyTwoNumbers = (x, y) => {
   return x * y;
 };
+
+/**
+ * Function in Interface
+ */
+interface A {
+  (input: number): number;
+}
+const a: A = (input) => {
+  return input;
+};
+
+interface B {
+  (input1: number): number;
+  (input2: number): number;
+}
+
+interface C {
+  c: (input: number) => number;
+}
+
+interface D {
+  d(input: number): number;
+}
