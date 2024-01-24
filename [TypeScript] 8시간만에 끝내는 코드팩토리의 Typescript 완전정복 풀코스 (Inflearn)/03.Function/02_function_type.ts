@@ -42,7 +42,7 @@ const aVariable: A = (input) => {
 
 interface B {
   (input1: number): number;
-  (input2: number): number;
+  (input2: string): string;
 }
 
 // 함수가 속성으로 정의.
