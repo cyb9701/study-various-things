@@ -1,4 +1,4 @@
-import AAA from './01_export_default_1';
+import AAA from './01-1_export_default';
 
 console.log('---1---');
 // const idol = new AAA('aaa', 123);

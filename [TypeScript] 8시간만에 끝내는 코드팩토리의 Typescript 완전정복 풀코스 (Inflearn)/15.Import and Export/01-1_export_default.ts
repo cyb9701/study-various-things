@@ -1,5 +1,5 @@
 /**
- * Export
+ * Export Default
  *
  * export는 파일당 한개만 가능하다.
  */
