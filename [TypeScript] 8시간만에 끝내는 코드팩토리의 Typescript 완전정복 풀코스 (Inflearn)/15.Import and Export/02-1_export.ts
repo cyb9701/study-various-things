@@ -14,3 +14,5 @@ export class IdolModel {
 export const sampleVar = 10;
 
 export type SampleType = string;
+
+export default class DefaultExportClass {}
