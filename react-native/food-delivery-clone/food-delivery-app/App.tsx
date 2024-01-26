@@ -4,8 +4,14 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import * as React from 'react';
-import {useCallback} from 'react';
-import {Pressable, Text, TouchableHighlight, View} from 'react-native';
+import {useCallback, useState} from 'react';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 
 type RootStackParamList = {
   Home: undefined;
@@ -65,6 +71,8 @@ function DetailsScreen({navigation}: DetailsScreenProps) {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
+  const [showModal, setShowModal] = useState(true);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
@@ -75,8 +83,33 @@ function App() {
         />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
+
+      {showModal && (
+        <Pressable
+          onPress={() => setShowModal(false)}
+          style={styles.modalBackground}>
+          <View style={styles.modal}>
+            <Text>Hello</Text>
+          </View>
+        </Pressable>
+      )}
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  modalBackground: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(52, 52, 52, 0.8)',
+  },
+  modal: {
+    flex: 1,
+    backgroundColor: 'orange',
+    borderRadius: 20,
+    padding: 20,
+    marginHorizontal: 50,
+    marginVertical: 100,
+  },
+});
 
 export default App;
