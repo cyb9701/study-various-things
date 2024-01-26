@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native-stack';
 import * as React from 'react';
 import {useCallback} from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import {Pressable, Text, TouchableHighlight, View} from 'react-native';
 
 type RootStackParamList = {
   Home: undefined;
@@ -20,11 +20,31 @@ function HomeScreen({navigation}: HomeScreenProps) {
   }, [navigation]);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <TouchableHighlight onPress={onClick}>
-        <Text>Home Screen</Text>
-      </TouchableHighlight>
-    </View>
+    <>
+      <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+        <Pressable
+          onPress={onClick}
+          style={{
+            paddingHorizontal: 40,
+            paddingVertical: 20,
+            backgroundColor: 'blue',
+            opacity: 0.4,
+          }}>
+          <Text style={{color: 'white'}}>홈 화면</Text>
+        </Pressable>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'yellow',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <TouchableHighlight onPress={onClick}>
+          <Text>홈 화면</Text>
+        </TouchableHighlight>
+      </View>
+    </>
   );
 }
 
@@ -51,7 +71,7 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'Overview'}}
+          options={{title: '홈 화면'}}
         />
         <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
