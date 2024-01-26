@@ -16,7 +16,7 @@ type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
 
 function HomeScreen({navigation}: HomeScreenProps) {
   const onClick = useCallback(() => {
-    navigation.navigate('Details');
+    navigation.push('Details');
   }, [navigation]);
 
   return (
@@ -50,7 +50,7 @@ function HomeScreen({navigation}: HomeScreenProps) {
 
 function DetailsScreen({navigation}: DetailsScreenProps) {
   const onClick = useCallback(() => {
-    navigation.navigate('Home');
+    navigation.goBack();
   }, [navigation]);
 
   return (
