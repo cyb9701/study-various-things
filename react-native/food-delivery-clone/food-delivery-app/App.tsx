@@ -6,6 +6,7 @@ import {
 import * as React from 'react';
 import {useCallback, useState} from 'react';
 import {
+  Dimensions,
   Pressable,
   StyleSheet,
   Text,
@@ -90,6 +91,15 @@ function App() {
           style={styles.modalBackground}>
           <View style={styles.modal}>
             <Text>Hello</Text>
+            <View
+              style={{
+                position: 'relative',
+                height: 50,
+                backgroundColor: 'blue',
+                opacity: 0.7,
+                top: -10,
+              }}></View>
+            <Text>Hello2222</Text>
           </View>
         </Pressable>
       )}
@@ -101,14 +111,18 @@ const styles = StyleSheet.create({
   modalBackground: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   modal: {
-    flex: 1,
+    width: Dimensions.get('window').width - 40,
+    height: 300,
     backgroundColor: 'orange',
     borderRadius: 20,
     padding: 20,
-    marginHorizontal: 50,
-    marginVertical: 100,
+    shadowColor: 'red',
+    shadowOpacity: 0.9,
+    shadowRadius: 50,
   },
 });
 
