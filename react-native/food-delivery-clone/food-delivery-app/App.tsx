@@ -1,129 +1,67 @@
-import {NavigationContainer, ParamListBase} from '@react-navigation/native';
-import {
-  NativeStackScreenProps,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import * as React from 'react';
-import {useCallback, useState} from 'react';
-import {
-  Dimensions,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {useState} from 'react';
+import Delivery from './src/pages/Delivery';
+import Orders from './src/pages/Orders';
+import Settings from './src/pages/Settings';
+import SignIn from './src/pages/SignIn';
+import SignUp from './src/pages/SignUp';
 
-type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
+export type LoggedInParamList = {
+  Orders: undefined;
+  Settings: undefined;
+  Delivery: undefined;
+  Complete: {orderId: string};
 };
-type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
-type DetailsScreenProps = NativeStackScreenProps<ParamListBase, 'Details'>;
 
-function HomeScreen({navigation}: HomeScreenProps) {
-  const onClick = useCallback(() => {
-    navigation.push('Details');
-  }, [navigation]);
+export type RootStackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+};
 
-  return (
-    <>
-      <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-        <Pressable
-          onPress={onClick}
-          style={{
-            paddingHorizontal: 40,
-            paddingVertical: 20,
-            backgroundColor: 'blue',
-            opacity: 0.4,
-          }}>
-          <Text style={{color: 'white'}}>홈 화면</Text>
-        </Pressable>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: 'yellow',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <TouchableHighlight onPress={onClick}>
-          <Text>홈 화면</Text>
-        </TouchableHighlight>
-      </View>
-    </>
-  );
-}
-
-function DetailsScreen({navigation}: DetailsScreenProps) {
-  const onClick = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
-
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <TouchableHighlight onPress={onClick}>
-        <Text>Details Screen</Text>
-      </TouchableHighlight>
-    </View>
-  );
-}
-
+const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function App() {
-  const [showModal, setShowModal] = useState(true);
-
+  const [isLoggedIn, setLoggedIn] = useState(false);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: '홈 화면'}}
-        />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-
-      {showModal && (
-        <Pressable
-          onPress={() => setShowModal(false)}
-          style={styles.modalBackground}>
-          <View style={styles.modal}>
-            <Text>Hello</Text>
-            <View
-              style={{
-                position: 'relative',
-                height: 50,
-                backgroundColor: 'blue',
-                opacity: 0.7,
-                top: -10,
-              }}></View>
-            <Text>Hello2222</Text>
-          </View>
-        </Pressable>
+      {isLoggedIn ? (
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Orders"
+            component={Orders}
+            options={{title: '오더 목록'}}
+          />
+          <Tab.Screen
+            name="Delivery"
+            component={Delivery}
+            options={{headerShown: false}}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={Settings}
+            options={{title: '내 정보'}}
+          />
+        </Tab.Navigator>
+      ) : (
+        <Stack.Navigator>
+          <Stack.Screen
+            name="SignIn"
+            component={SignIn}
+            options={{title: '로그인'}}
+          />
+          <Stack.Screen
+            name="SignUp"
+            component={SignUp}
+            options={{title: '회원가입'}}
+          />
+        </Stack.Navigator>
       )}
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  modalBackground: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(52, 52, 52, 0.8)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modal: {
-    width: Dimensions.get('window').width - 40,
-    height: 300,
-    backgroundColor: 'orange',
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: 'red',
-    shadowOpacity: 0.9,
-    shadowRadius: 50,
-  },
-});
 
 export default App;
