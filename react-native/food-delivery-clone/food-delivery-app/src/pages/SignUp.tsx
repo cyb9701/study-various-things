@@ -61,7 +61,6 @@ function SignUp({navigation}: SignUpScreenProps) {
   const canGoNext = email && name && password;
   return (
     <DismissKeyboardView>
-      <View style={{height: 300}}></View>
       <View style={styles.inputWrapper}>
         <Text style={styles.label}>이메일</Text>
         <TextInput
