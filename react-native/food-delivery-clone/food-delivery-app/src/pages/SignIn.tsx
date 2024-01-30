@@ -13,13 +13,13 @@ import {RootStackParamList} from '../../App';
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
 function SignIn(navigation: SignInScreenProps) {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('123@naver.com');
   const emailRef = useRef<TextInput | null>(null);
   const onChangeEmail = useCallback((text: string) => {
     setEmail(text.trim());
   }, []);
 
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('qwer1234@');
   const passwordRef = useRef<TextInput | null>(null);
   const onChangePassword = useCallback((text: string) => {
     setPassword(text.trim());

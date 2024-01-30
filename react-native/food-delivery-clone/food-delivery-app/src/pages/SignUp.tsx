@@ -11,7 +11,6 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import Config from 'react-native-config';
 import {RootStackParamList} from '../../App';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 
@@ -19,9 +18,9 @@ type SignUpScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUp'>;
 
 function SignUp({navigation}: SignUpScreenProps) {
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('123@naver.com');
+  const [name, setName] = useState('123');
+  const [password, setPassword] = useState('qwer1234@');
   const emailRef = useRef<TextInput | null>(null);
   const nameRef = useRef<TextInput | null>(null);
   const passwordRef = useRef<TextInput | null>(null);
@@ -65,26 +64,25 @@ function SignUp({navigation}: SignUpScreenProps) {
         '비밀번호는 영문,숫자,특수문자($@^!%*#?&)를 모두 포함하여 8자 이상 입력해야합니다.',
       );
     }
-    console.log(email, name, password);
 
     try {
       setLoading(true);
-      const response = await axios.post(`${Config.API_URL}/user`, {
+      const response = await axios.post('http://localhost:3105/user', {
         email,
         name,
         password,
       });
-      Alert.alert('알림', '회원가입 되었습니다.');
-    } catch (e) {
-      console.log(e);
 
+      Alert.alert('알림', '회원가입 되었습니다.');
+      navigation.navigate('SignIn');
+    } catch (e) {
       if ((e as AxiosError).response) {
         Alert.alert('알림', (e as AxiosError).message);
       }
     } finally {
       setLoading(false);
     }
-  }, [email, name, password, loading]);
+  }, [email, name, password, loading, navigation]);
 
   const canGoNext = email && name && password;
   return (
