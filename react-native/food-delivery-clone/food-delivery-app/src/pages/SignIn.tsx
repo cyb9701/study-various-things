@@ -59,7 +59,7 @@ function SignIn(navigation: SignInScreenProps) {
           returnKeyType="next"
           ref={emailRef}
           onSubmitEditing={() => {
-            passwordRef.current?.focus;
+            passwordRef.current?.focus();
           }}
           blurOnSubmit={false}
           clearButtonMode="while-editing"
