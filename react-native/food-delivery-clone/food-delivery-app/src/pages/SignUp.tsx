@@ -11,6 +11,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import Config from 'react-native-config';
 import {RootStackParamList} from '../../App';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 
@@ -67,7 +68,7 @@ function SignUp({navigation}: SignUpScreenProps) {
 
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:3105/user', {
+      const response = await axios.post(`${Config.API_URL}/user`, {
         email,
         name,
         password,

@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import axios, {AxiosError} from 'axios';
 import React, {useCallback, useRef, useState} from 'react';
 import {
   Alert,
@@ -8,6 +9,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import Config from 'react-native-config';
 import {RootStackParamList} from '../../App';
 
 type SignInScreenProps = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
@@ -25,17 +27,34 @@ function SignIn(navigation: SignInScreenProps) {
     setPassword(text.trim());
   }, []);
 
-  const onSubmit = useCallback(() => {
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = useCallback(async () => {
+    if (loading) {
+      return;
+    }
     if (!email || !email.trim()) {
-      return Alert.alert('알림', '값을 입력해주세요.');
+      return Alert.alert('알림', '이메일을 입력해주세요.');
     }
-
     if (!password || !password.trim()) {
-      return Alert.alert('알림', '값을 입력해주세요.');
+      return Alert.alert('알림', '비밀번호를 입력해주세요.');
     }
-
-    return Alert.alert('알림', '로그인 되었습니다.');
-  }, [email, password]);
+    try {
+      setLoading(true);
+      const response = await axios.post(`${Config.API_URL}/login`, {
+        email,
+        password,
+      });
+      console.log(response.data);
+      Alert.alert('알림', '로그인 되었습니다.');
+    } catch (error) {
+      if ((error as AxiosError).response) {
+        Alert.alert('알림', (error as AxiosError).message);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [loading, email, password]);
 
   const canGoNext = !email || !password;
 
