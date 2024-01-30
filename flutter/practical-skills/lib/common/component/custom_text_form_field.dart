@@ -29,6 +29,9 @@ class CustomTextFormField extends StatelessWidget {
       autocorrect: autoFocus,
       onChanged: onChanged,
       cursorColor: primaryColor,
+      onTapOutside: (_) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(20),
         hintText: hintText,
@@ -40,6 +43,7 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: inputBgColor,
         filled: true,
         border: baseBorder,
+        enabledBorder: baseBorder,
         focusedBorder: baseBorder.copyWith(
           borderSide: baseBorder.borderSide.copyWith(
             color: primaryColor,
