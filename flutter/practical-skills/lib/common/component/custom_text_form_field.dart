@@ -4,8 +4,18 @@ import 'package:practical_skills/common/const/colors.dart';
 class CustomTextFormField extends StatelessWidget {
   final String? hintText;
   final String? errorText;
+  final bool obscureText;
+  final bool autoFocus;
+  final ValueChanged<String>? onChanged;
 
-  const CustomTextFormField({super.key, this.hintText, this.errorText});
+  const CustomTextFormField({
+    super.key,
+    this.hintText,
+    this.errorText,
+    this.obscureText = false,
+    this.autoFocus = false,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +25,9 @@ class CustomTextFormField extends StatelessWidget {
     ));
 
     return TextFormField(
+      obscureText: obscureText,
+      autocorrect: autoFocus,
+      onChanged: onChanged,
       cursorColor: primaryColor,
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.all(20),
