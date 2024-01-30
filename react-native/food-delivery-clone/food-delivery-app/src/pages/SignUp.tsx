@@ -11,6 +11,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import Config from 'react-native-config';
 import {RootStackParamList} from '../../App';
 import DismissKeyboardView from '../components/DismissKeyboardView';
 
@@ -68,9 +69,15 @@ function SignUp({navigation}: SignUpScreenProps) {
 
     try {
       setLoading(true);
-      const response = await axios.post('/user', {email, name, password});
+      const response = await axios.post(`${Config.API_URL}/user`, {
+        email,
+        name,
+        password,
+      });
       Alert.alert('알림', '회원가입 되었습니다.');
     } catch (e) {
+      console.log(e);
+
       if ((e as AxiosError).response) {
         Alert.alert('알림', (e as AxiosError).message);
       }
