@@ -20,6 +20,12 @@ class App extends StatelessWidget {
           children: [
             CustomTextFormField(
               hintText: '이메일을 입력해주세요',
+              onChanged: (value) {},
+            ),
+            CustomTextFormField(
+              hintText: '비밀번호를 입력해주세요',
+              obscureText: true,
+              onChanged: (value) {},
             ),
           ],
         ),
