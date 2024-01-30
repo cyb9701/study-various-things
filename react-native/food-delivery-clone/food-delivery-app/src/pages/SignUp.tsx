@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import axios from 'axios';
 import React, {useCallback, useRef, useState} from 'react';
 import {
   Alert,
@@ -31,7 +32,7 @@ function SignUp({navigation}: SignUpScreenProps) {
   const onChangePassword = useCallback((text: string) => {
     setPassword(text.trim());
   }, []);
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     if (!email || !email.trim()) {
       return Alert.alert('알림', '이메일을 입력해주세요.');
     }
@@ -55,6 +56,15 @@ function SignUp({navigation}: SignUpScreenProps) {
       );
     }
     console.log(email, name, password);
+
+    try {
+      const response = await axios.post('/user', {email, name, password});
+      console.log(response);
+    } catch (e) {
+      console.log(e.response);
+    } finally {
+    }
+
     Alert.alert('알림', '회원가입 되었습니다.');
   }, [email, name, password]);
 
