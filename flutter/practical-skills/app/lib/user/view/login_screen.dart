@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 import 'package:practical_skills/common/view/root_tab.dart';
 
@@ -19,10 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   String username = 'test@codefactory.ai';
   String password = 'testtest';
 
+  final dio = Dio();
+
   @override
   Widget build(BuildContext context) {
     const ip = 'http://127.0.0.1:3000';
-    final dio = Dio();
 
     return DefaultLayout(
       child: SingleChildScrollView(
@@ -62,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Codec<String, String> stringToBase64 = utf8.fuse(base64);
                     String token = stringToBase64.encode(rawString);
 
-                    await dio.post(
+                    final response = await dio.post(
                       '$ip/auth/login',
                       options: Options(
                         headers: {
@@ -70,6 +72,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                     );
+
+                    final refreshToken = response.data['refreshToken'];
+                    final accessToken = response.data['accessToken'];
+
+                    await storage.write(key: refreshTokenKey, value: refreshToken);
+                    await storage.write(key: accessTokenKey, value: accessToken);
 
                     if (!mounted) return;
                     Navigator.push(
