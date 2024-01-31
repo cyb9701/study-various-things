@@ -20,9 +20,10 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const baseBorder = OutlineInputBorder(
-        borderSide: BorderSide(
-      color: inputBorderColor,
-    ));
+      borderSide: BorderSide(
+        color: inputBorderColor,
+      ),
+    );
 
     return TextFormField(
       obscureText: obscureText,
