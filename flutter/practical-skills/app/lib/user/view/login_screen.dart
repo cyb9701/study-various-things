@@ -3,12 +3,21 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
+import 'package:practical_skills/common/view/root_tab.dart';
 
 import '../../common/component/custom_text_form_field.dart';
 import '../../common/const/colors.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String username = 'test@codefactory.ai';
+  String password = 'testtest';
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +43,26 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 CustomTextFormField(
                   hintText: '이메일을 입력해주세요',
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    username = value;
+                  },
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormField(
                   hintText: '비밀번호를 입력해주세요',
                   obscureText: true,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    password = value;
+                  },
                 ),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () async {
-                    const rawString = 'test@codefactory.ai:testtest';
+                    final rawString = '$username:$password';
                     Codec<String, String> stringToBase64 = utf8.fuse(base64);
                     String token = stringToBase64.encode(rawString);
 
-                    final response = await dio.post(
+                    await dio.post(
                       '$ip/auth/login',
                       options: Options(
                         headers: {
@@ -58,7 +71,13 @@ class LoginScreen extends StatelessWidget {
                       ),
                     );
 
-                    print(response.data);
+                    if (!mounted) return;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RootTab(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: primaryColor,
@@ -72,7 +91,7 @@ class LoginScreen extends StatelessWidget {
                     const refreshToken =
                         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoicmVmcmVzaCIsImlhdCI6MTcwNjY2NjE0NywiZXhwIjoxNzA2NzUyNTQ3fQ.aA-xG5zwnsDchzfkLORDE0MeVi6YKIvBdSjE6dUOSQg, accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RAY29kZWZhY3RvcnkuYWkiLCJzdWIiOiJmNTViMzJkMi00ZDY4LTRjMWUtYTNjYS1kYTlkN2QwZDkyZTUiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzA2NjY2MTQ3LCJleHAiOjE3MDY2NjY0NDd9.drQYxDr8WPisuJIDs8Q40oMZV83dOzHnPnr2CVYS7K4';
 
-                    final response = await dio.post(
+                    await dio.post(
                       '$ip/auth/token',
                       options: Options(
                         headers: {
