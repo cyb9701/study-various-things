@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/colors.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
@@ -16,10 +17,19 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkToken() async {
     final refreshToken = await storage.read(key: refreshTokenKey);
-    final accessToken = await storage.read(key: accessTokenKey);
+    // final accessToken = await storage.read(key: accessTokenKey);
 
-    if (!mounted) return;
-    if (refreshToken == null || accessToken == null) {
+    try {
+      await Dio().post(
+        '$ip/auth/token',
+        options: Options(
+          headers: {
+            'authorization': 'Bearer $refreshToken',
+          },
+        ),
+      );
+    } catch (e) {
+      if (!mounted) return;
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
@@ -27,15 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         (route) => false,
       );
-    } else {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const RootTab(),
-        ),
-        (route) => false,
-      );
     }
+
+    if (!mounted) return;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RootTab(),
+      ),
+      (route) => false,
+    );
   }
 
   Future<void> deleteToken() async {

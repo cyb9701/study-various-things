@@ -23,63 +23,61 @@ class RastaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: image,
-            ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: image,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              Text(
-                tags.join(' · '),
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                name,
                 style: const TextStyle(
-                  color: bodyTextColor,
-                  fontSize: 14,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-              Row(
-                children: [
-                  _IconText(
-                    icon: Icons.star,
-                    label: ratings.toString(),
-                  ),
-                  const _RenderDot(),
-                  _IconText(
-                    icon: Icons.receipt,
-                    label: ratingCount.toString(),
-                  ),
-                  const _RenderDot(),
-                  _IconText(
-                    icon: Icons.timelapse_outlined,
-                    label: '$deliveryTime분',
-                  ),
-                  const _RenderDot(),
-                  _IconText(
-                    icon: Icons.monetization_on,
-                    label: deliveryFee == 0 ? '무료' : deliveryFee.toString(),
-                  ),
-                ],
+            ),
+            Text(
+              tags.join(' · '),
+              style: const TextStyle(
+                color: bodyTextColor,
+                fontSize: 14,
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+            Row(
+              children: [
+                _IconText(
+                  icon: Icons.star,
+                  label: ratings.toString(),
+                ),
+                const _RenderDot(),
+                _IconText(
+                  icon: Icons.receipt,
+                  label: ratingCount.toString(),
+                ),
+                const _RenderDot(),
+                _IconText(
+                  icon: Icons.timelapse_outlined,
+                  label: '$deliveryTime분',
+                ),
+                const _RenderDot(),
+                _IconText(
+                  icon: Icons.monetization_on,
+                  label: deliveryFee == 0 ? '무료' : deliveryFee.toString(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
