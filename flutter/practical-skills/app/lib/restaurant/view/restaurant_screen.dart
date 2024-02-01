@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/data.dart';
 
 import '../component/restaurant_card.dart';
+import '../model/restaurant_model.dart';
 
 class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
 
   Future<List> _paginateRestaurant() async {
-    print('---request---');
     final dio = Dio();
     final accessToken = await storage.read(key: accessTokenKey);
 
@@ -32,6 +32,7 @@ class RestaurantScreen extends StatelessWidget {
         future: _paginateRestaurant(),
         builder: (context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasError) {
+            debugPrint(snapshot.error.toString());
             return const Icon(
               Icons.error,
               color: Colors.red,
@@ -45,19 +46,19 @@ class RestaurantScreen extends StatelessWidget {
             itemCount: items.length,
             separatorBuilder: (context, index) => const SizedBox(height: 20),
             itemBuilder: (context, index) {
-              final item = items[index];
+              final item = RestaurantModel.fromJson(items[index]);
 
               return RastaurantCard(
                 image: Image.network(
-                  '$ip/${item['thumbUrl']}',
+                  item.thumbUrl,
                   fit: BoxFit.cover,
                 ),
-                name: item['name'],
-                tags: List<String>.from(item['tags']),
-                ratingsCount: item['ratingsCount'],
-                deliveryTime: item['deliveryTime'],
-                deliveryFee: item['deliveryFee'],
-                ratings: item['ratings'],
+                name: item.name,
+                tags: item.tags,
+                ratingsCount: item.ratingsCount,
+                deliveryTime: item.deliveryTime,
+                deliveryFee: item.deliveryFee,
+                ratings: item.ratings,
               );
             },
           );

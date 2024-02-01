@@ -30,6 +30,15 @@ class _SplashScreenState extends State<SplashScreen> {
       );
 
       await storage.write(key: accessTokenKey, value: response.data['accessToken']);
+
+      if (!mounted) return;
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const RootTab(),
+        ),
+        (route) => false,
+      );
     } catch (e) {
       if (!mounted) return;
       Navigator.pushAndRemoveUntil(
@@ -40,15 +49,6 @@ class _SplashScreenState extends State<SplashScreen> {
         (route) => false,
       );
     }
-
-    if (!mounted) return;
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const RootTab(),
-      ),
-      (route) => false,
-    );
   }
 
   Future<void> deleteToken() async {
