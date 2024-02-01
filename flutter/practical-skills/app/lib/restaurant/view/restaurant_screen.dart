@@ -46,20 +46,8 @@ class RestaurantScreen extends StatelessWidget {
             itemCount: items.length,
             separatorBuilder: (context, index) => const SizedBox(height: 20),
             itemBuilder: (context, index) {
-              final item = RestaurantModel.fromJson(items[index]);
-
-              return RastaurantCard(
-                image: Image.network(
-                  item.thumbUrl,
-                  fit: BoxFit.cover,
-                ),
-                name: item.name,
-                tags: item.tags,
-                ratingsCount: item.ratingsCount,
-                deliveryTime: item.deliveryTime,
-                deliveryFee: item.deliveryFee,
-                ratings: item.ratings,
-              );
+              final model = RestaurantModel.fromJson(items[index]);
+              return RastaurantCard.fromModel(model);
             },
           );
         },
