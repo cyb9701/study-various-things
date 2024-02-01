@@ -39,7 +39,9 @@ class RestaurantScreen extends StatelessWidget {
               color: Colors.red,
             );
           } else if (!snapshot.hasData) {
-            return const SizedBox.shrink();
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           }
 
           final items = snapshot.data!;
@@ -52,7 +54,12 @@ class RestaurantScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const RastaurantDetailScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => RastaurantDetailScreen(
+                        id: model.id,
+                        name: model.name,
+                      ),
+                    ),
                   );
                 },
                 child: RastaurantCard.fromModel(

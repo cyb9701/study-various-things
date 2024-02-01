@@ -1,40 +1,70 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
+import '../model/restaurant_detail_model.dart';
 
 class RastaurantDetailScreen extends StatelessWidget {
-  const RastaurantDetailScreen({super.key});
+  final String id;
+  final String name;
+
+  const RastaurantDetailScreen({
+    super.key,
+    required this.id,
+    required this.name,
+  });
+
+  Future<Map<String, dynamic>> _getRestaurantDetail() async {
+    final dio = Dio();
+    final accessToken = await storage.read(key: accessTokenKey);
+
+    final response = await dio.get(
+      '$ip/restaurant/$id',
+      options: Options(
+        headers: {
+          'authorization': 'Bearer $accessToken',
+        },
+      ),
+    );
+
+    return response.data;
+  }
 
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-      title: '123',
-      child: CustomScrollView(
-        slivers: [
-          _renderTop(),
-          _renderLabel(),
-          _renderProducts(),
-        ],
+      title: name,
+      child: FutureBuilder(
+        future: _getRestaurantDetail(),
+        builder: (contet, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final item = RestaurantDetailModel.fromJson(snapshot.data!);
+          return CustomScrollView(
+            slivers: [
+              _renderTop(model: item),
+              _renderLabel(),
+              _renderProducts(),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _renderTop() {
+  Widget _renderTop({
+    required RestaurantDetailModel model,
+  }) {
     return SliverToBoxAdapter(
-      child: RastaurantCard(
-        image: Image.asset(
-          'assets/img/food/ddeok_bok_gi.jpg',
-        ),
-        name: 'name',
-        tags: const ['tags'],
-        ratingsCount: 1,
-        deliveryTime: 2,
-        deliveryFee: 3,
-        ratings: 4,
+      child: RastaurantCard.fromModel(
+        model: model,
         isDetail: true,
-        detail: '맛있는 떡볶이',
       ),
     );
   }
