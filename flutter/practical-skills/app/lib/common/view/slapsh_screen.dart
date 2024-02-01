@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // final accessToken = await storage.read(key: accessTokenKey);
 
     try {
-      await Dio().post(
+      final response = await Dio().post(
         '$ip/auth/token',
         options: Options(
           headers: {
@@ -28,6 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
           },
         ),
       );
+
+      await storage.write(key: accessTokenKey, value: response.data['accessToken']);
     } catch (e) {
       if (!mounted) return;
       Navigator.pushAndRemoveUntil(

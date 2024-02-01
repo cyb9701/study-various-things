@@ -5,7 +5,7 @@ class RastaurantCard extends StatelessWidget {
   final Widget image;
   final String name;
   final List<String> tags;
-  final int ratingCount;
+  final int ratingsCount;
   final int deliveryTime;
   final int deliveryFee;
   final double ratings;
@@ -15,7 +15,7 @@ class RastaurantCard extends StatelessWidget {
     required this.image,
     required this.name,
     required this.tags,
-    required this.ratingCount,
+    required this.ratingsCount,
     required this.deliveryTime,
     required this.deliveryFee,
     required this.ratings,
@@ -35,21 +35,21 @@ class RastaurantCard extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
+            Text(
+              name,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            Text(
-              tags.join(' · '),
-              style: const TextStyle(
-                color: bodyTextColor,
-                fontSize: 14,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
+                tags.join(' · '),
+                style: const TextStyle(
+                  color: bodyTextColor,
+                  fontSize: 14,
+                ),
               ),
             ),
             Row(
@@ -61,7 +61,7 @@ class RastaurantCard extends StatelessWidget {
                 const _RenderDot(),
                 _IconText(
                   icon: Icons.receipt,
-                  label: ratingCount.toString(),
+                  label: ratingsCount.toString(),
                 ),
                 const _RenderDot(),
                 _IconText(
