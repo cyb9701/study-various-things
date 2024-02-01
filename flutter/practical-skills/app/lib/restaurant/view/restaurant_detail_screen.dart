@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
+import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
 
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
@@ -50,7 +51,7 @@ class RastaurantDetailScreen extends StatelessWidget {
             slivers: [
               _renderTop(model: item),
               _renderLabel(),
-              _renderProducts(),
+              _renderProducts(products: item.products),
             ],
           );
         },
@@ -84,18 +85,20 @@ class RastaurantDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _renderProducts() {
+  Widget _renderProducts({
+    required List<RestaurantProductModel> products,
+  }) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return const Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: ProductCard(),
+            return Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: ProductCard.fromModel(model: products[index]),
             );
           },
-          childCount: 10,
+          childCount: products.length,
         ),
       ),
     );

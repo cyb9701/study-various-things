@@ -1,3 +1,5 @@
+import 'package:practical_skills/common/const/data.dart';
+
 class RestaurantProductModel {
   final String id;
   final String name;
@@ -17,7 +19,7 @@ class RestaurantProductModel {
     return RestaurantProductModel(
       id: json['id'],
       name: json['name'],
-      imgUrl: json['imgUrl'],
+      imgUrl: '$ip${json['imgUrl']}',
       detail: json['detail'],
       price: json['price'],
     );
