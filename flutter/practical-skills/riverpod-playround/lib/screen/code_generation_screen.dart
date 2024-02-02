@@ -11,6 +11,7 @@ class CodeGenerationScreen extends ConsumerWidget {
     final state1 = ref.watch(goStateProvider);
     final state2 = ref.watch(goStateFutureProvider);
     final state3 = ref.watch(goKeepAliveStateFutureProvider);
+    final state4 = ref.watch(goStateMultiplyProvider(number1: 10, number2: 20));
 
     return DefaultLayout(
       title: 'Code Generation',
@@ -30,6 +31,9 @@ class CodeGenerationScreen extends ConsumerWidget {
               data: (data) => Text('state3: $data'),
               error: (e, s) => Text(e.toString()),
               loading: () => const Text('state3: Loading'),
+            ),
+            Text(
+              'state4: $state4',
             ),
           ],
         ),
