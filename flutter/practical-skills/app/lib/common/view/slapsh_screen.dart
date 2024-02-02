@@ -24,11 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
         '$ip/auth/token',
         options: Options(
           headers: {
-            'authorization': 'Bearer $refreshToken',
+            authorization: '$bearer $refreshToken',
           },
         ),
       );
 
+      print(response.data);
       await storage.write(key: accessTokenKey, value: response.data['accessToken']);
 
       if (!mounted) return;

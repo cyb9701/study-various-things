@@ -17,7 +17,7 @@ class RestaurantScreen extends StatelessWidget {
       '$ip/restaurant',
       options: Options(
         headers: {
-          'authorization': 'Bearer $accessToken',
+          authorization: '$bearer $accessToken',
         },
       ),
     );

@@ -19,10 +19,12 @@ class _RestaurantRepository implements RestaurantRepository {
   String? baseUrl;
 
   @override
-  Future<RestaurantDetailModel> getRestaurantDetail({required String rid}) async {
+  Future<RestaurantDetailModel> getRestaurantDetail({
+    required String rid,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'authorization': 'Bearer '};
+    final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
