@@ -2,10 +2,41 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'cursor_pagination_model.g.dart';
 
+// 기본.
+abstract class CursorPaginationBase {}
+
+// 오류.
+class CursorPaginationErrorState extends CursorPaginationBase {
+  final String message;
+
+  CursorPaginationErrorState({
+    required this.message,
+  });
+}
+
+// 로딩 진행 중.
+class CusorPaginationLoadingState extends CursorPaginationBase {}
+
+// 새로고침 진행 중.
+class CusorPaginationRefetchingState<T> extends CursorPaginationModel<T> {
+  CusorPaginationRefetchingState({
+    required super.meta,
+    required super.data,
+  });
+}
+
+// 추가 데이터 요청 진행 중.
+class CusorPaginationFetchingMoreState<T> extends CursorPaginationModel<T> {
+  CusorPaginationFetchingMoreState({
+    required super.meta,
+    required super.data,
+  });
+}
+
 @JsonSerializable(
   genericArgumentFactories: true,
 )
-class CursorPaginationModel<T> {
+class CursorPaginationModel<T> extends CursorPaginationBase {
   final CursorPaginationMetaModel meta;
   final List<T> data;
 
