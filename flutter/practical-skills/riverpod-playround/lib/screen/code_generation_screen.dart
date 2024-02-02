@@ -12,6 +12,7 @@ class CodeGenerationScreen extends ConsumerWidget {
     final state2 = ref.watch(goStateFutureProvider);
     final state3 = ref.watch(goKeepAliveStateFutureProvider);
     final state4 = ref.watch(goStateMultiplyProvider(number1: 10, number2: 20));
+    final state5 = ref.watch(goStateNotifierProvider);
 
     return DefaultLayout(
       title: 'Code Generation',
@@ -19,9 +20,7 @@ class CodeGenerationScreen extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'state1: $state1',
-            ),
+            Text('state1: $state1'),
             state2.when(
               data: (data) => Text('state2: $data'),
               error: (e, s) => Text(e.toString()),
@@ -32,8 +31,20 @@ class CodeGenerationScreen extends ConsumerWidget {
               error: (e, s) => Text(e.toString()),
               loading: () => const Text('state3: Loading'),
             ),
-            Text(
-              'state4: $state4',
+            Text('state4: $state4'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('state5: $state5'),
+                ElevatedButton(
+                  onPressed: () => ref.read(goStateNotifierProvider.notifier).decrease(),
+                  child: const Text('decrease'),
+                ),
+                ElevatedButton(
+                  onPressed: () => ref.read(goStateNotifierProvider.notifier).increase(),
+                  child: const Text('increase'),
+                ),
+              ],
             ),
           ],
         ),

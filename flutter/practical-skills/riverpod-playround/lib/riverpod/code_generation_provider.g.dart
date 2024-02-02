@@ -228,5 +228,22 @@ class _GoStateMultiplyProviderElement extends AutoDisposeProviderElement<int>
   @override
   int get number2 => (origin as GoStateMultiplyProvider).number2;
 }
+
+String _$goStateNotifierHash() => r'19f2b7721b49ed4d56a4209b55df58e42022d6b7';
+
+/// state notifier
+///
+/// Copied from [GoStateNotifier].
+@ProviderFor(GoStateNotifier)
+final goStateNotifierProvider = NotifierProvider<GoStateNotifier, int>.internal(
+  GoStateNotifier.new,
+  name: r'goStateNotifierProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$goStateNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$GoStateNotifier = Notifier<int>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

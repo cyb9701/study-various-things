@@ -5,6 +5,8 @@ part 'code_generation_provider.g.dart';
 /// 사용하는 이유
 ///
 /// 1) 어떤 provider를 사용할지 결정할 고민할 필요 없도록.
+/// Provider, FutureProvider, StreamProvider(x).
+/// StateNotifierProvider - 명시적으로 사용.
 
 // final _testProvider = Provider<String>((ref) => 'Hello Code Generation');
 
@@ -48,4 +50,22 @@ int goStateMultiply(
   required int number2,
 }) {
   return number1 * number2;
+}
+
+/// state notifier
+@Riverpod(keepAlive: true)
+class GoStateNotifier extends _$GoStateNotifier {
+  // 초기 상태값 지정.
+  @override
+  int build() {
+    return 10;
+  }
+
+  void increase() {
+    state++;
+  }
+
+  void decrease() {
+    state--;
+  }
 }
