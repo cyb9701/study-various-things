@@ -7,6 +7,8 @@ import 'package:riverpod_playround/screen/state_notifier_provider_screen.dart';
 import 'package:riverpod_playround/screen/state_provider_screen.dart';
 import 'package:riverpod_playround/screen/stream_provider_screen.dart';
 
+import 'listen_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -92,6 +94,19 @@ class HomeScreen extends StatelessWidget {
             },
             child: const Text(
               'Auto Dispose Modifier',
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ListenScreen(),
+                ),
+              );
+            },
+            child: const Text(
+              'Listen',
             ),
           ),
         ],
