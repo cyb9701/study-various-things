@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/model/cursor_pagination_model.dart';
-import 'package:practical_skills/restaurant/repository/restaruant_repository_provider.dart';
+import 'package:practical_skills/restaurant/provider/restaruant_repository_provider.dart';
 
 import '../repository/restaurant_repository.dart';
 
@@ -16,7 +16,7 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
   final RestaurantRepository repository;
   RestaurantStateNotifier({
     required this.repository,
-  }) : super(CursorPaginationBase()) {
+  }) : super(CusorPaginationLoadingState()) {
     paginate();
   }
 

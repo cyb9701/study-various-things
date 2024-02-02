@@ -6,7 +6,7 @@ import 'package:practical_skills/restaurant/model/restaurant_product_model.dart'
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_detail_model.dart';
-import '../repository/restaruant_repository_provider.dart';
+import '../provider/restaruant_repository_provider.dart';
 
 class RastaurantDetailScreen extends ConsumerWidget {
   final String id;
