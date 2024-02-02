@@ -8,16 +8,16 @@ class StateProviderScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(numberProvider);
+    final state = ref.watch(numberProvider);
 
     return DefaultLayout(
-      title: 'StateProviderScreen',
+      title: 'State Provider',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              provider.toString(),
+              state.toString(),
             ),
             ElevatedButton(
               onPressed: () {
@@ -64,7 +64,7 @@ class _NextScreen extends ConsumerWidget {
     final provider = ref.watch(numberProvider);
 
     return DefaultLayout(
-      title: 'NextStateProviderScreen',
+      title: 'Next State Provider',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
