@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
+import 'package:practical_skills/restaurant/repository/restaurant_repository.dart';
 
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
@@ -18,20 +19,12 @@ class RastaurantDetailScreen extends StatelessWidget {
     required this.name,
   });
 
-  Future<Map<String, dynamic>> _getRestaurantDetail() async {
+  Future<RestaurantDetailModel> _getRestaurantDetail() async {
     final dio = Dio();
-    final accessToken = await storage.read(key: accessTokenKey);
 
-    final response = await dio.get(
-      '$ip/restaurant/$id',
-      options: Options(
-        headers: {
-          'authorization': 'Bearer $accessToken',
-        },
-      ),
-    );
-
-    return response.data;
+    final repository = RestaurantRepository(dio, baseUrl: '$ip/restaurant');
+    final result = await repository.getRestaurantDetail(rid: id);
+    return result;
   }
 
   @override
@@ -40,18 +33,17 @@ class RastaurantDetailScreen extends StatelessWidget {
       title: name,
       child: FutureBuilder(
         future: _getRestaurantDetail(),
-        builder: (contet, AsyncSnapshot<Map<String, dynamic>> snapshot) {
+        builder: (contet, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          final item = RestaurantDetailModel.fromJson(snapshot.data!);
           return CustomScrollView(
             slivers: [
-              _renderTop(model: item),
+              _renderTop(model: snapshot.data!),
               _renderLabel(),
-              _renderProducts(products: item.products),
+              _renderProducts(products: snapshot.data!.products),
             ],
           );
         },
