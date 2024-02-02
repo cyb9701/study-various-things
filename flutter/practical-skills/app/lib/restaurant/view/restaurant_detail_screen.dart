@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
-import 'package:practical_skills/restaurant/repository/restaurant_repository.dart';
 
-import '../../common/dio/dio_provider.dart';
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_detail_model.dart';
+import '../repository/restaruant_repository_provider.dart';
 
 class RastaurantDetailScreen extends ConsumerWidget {
   final String id;
@@ -20,20 +18,12 @@ class RastaurantDetailScreen extends ConsumerWidget {
     required this.name,
   });
 
-  Future<RestaurantDetailModel> _getRestaurantDetail(WidgetRef ref) async {
-    final dio = ref.read(dioProvider);
-
-    final repository = RestaurantRepository(dio, baseUrl: '$ip/restaurant');
-    final result = await repository.getRestaurantDetail(rid: id);
-    return result;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DefaultLayout(
       title: name,
       child: FutureBuilder(
-        future: _getRestaurantDetail(ref),
+        future: ref.read(restaurantRepositoryProvider).getRestaurantDetail(rid: id),
         builder: (contet, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if (!snapshot.hasData) {
             return const Center(
