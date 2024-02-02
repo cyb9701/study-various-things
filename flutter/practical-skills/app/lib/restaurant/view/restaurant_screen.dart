@@ -3,26 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/data.dart';
 import 'package:practical_skills/restaurant/view/restaurant_detail_screen.dart';
 
+import '../../common/dio/dio.dart';
+import '../../common/model/cursor_pagination_model.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_model.dart';
+import '../repository/restaurant_repository.dart';
 
 class RestaurantScreen extends StatelessWidget {
   const RestaurantScreen({super.key});
 
-  Future<List> _paginateRestaurant() async {
+  Future<List<RestaurantModel>> _paginateRestaurant() async {
     final dio = Dio();
-    final accessToken = await storage.read(key: accessTokenKey);
 
-    final response = await dio.get(
-      '$ip/restaurant',
-      options: Options(
-        headers: {
-          authorization: '$bearer $accessToken',
-        },
+    dio.interceptors.add(
+      CustomInterceptor(
+        storage: storage,
       ),
     );
 
-    return response.data['data'];
+    final repository = RestaurantRepository(dio, baseUrl: '$ip/restaurant');
+    final CursorPaginationModel<RestaurantModel> result = await repository.paginate();
+    return result.data;
   }
 
   @override
@@ -31,7 +32,7 @@ class RestaurantScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: FutureBuilder(
         future: _paginateRestaurant(),
-        builder: (context, AsyncSnapshot<List> snapshot) {
+        builder: (context, AsyncSnapshot<List<RestaurantModel>> snapshot) {
           if (snapshot.hasError) {
             return const Icon(
               Icons.error,
@@ -48,7 +49,7 @@ class RestaurantScreen extends StatelessWidget {
             itemCount: items.length,
             separatorBuilder: (context, index) => const SizedBox(height: 20),
             itemBuilder: (context, index) {
-              final model = RestaurantModel.fromJson(items[index]);
+              final model = items[index];
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
