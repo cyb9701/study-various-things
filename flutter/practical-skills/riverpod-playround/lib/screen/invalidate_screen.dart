@@ -12,7 +12,7 @@ class InvalidateScreen extends ConsumerWidget {
     final state = ref.watch(numberProvider);
 
     return DefaultLayout(
-      title: 'State Provider',
+      title: 'Invalidate',
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
