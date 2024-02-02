@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final multiplesFutureProvider = FutureProvider<List<int>>((ref) async {
+final multipleFutureProvider = FutureProvider<List<int>>((ref) async {
   return await Future.delayed(const Duration(seconds: 3), () {
     return [1, 2, 3, 4, 5];
   });
