@@ -5,11 +5,23 @@ part 'code_generation_provider.g.dart';
 /// 사용하는 이유
 ///
 /// 1) 어떤 provider를 사용할지 결정할 고민할 필요 없도록.
-final _testProvider = Provider<String>((ref) => 'Hello Code Generation');
+// final _testProvider = Provider<String>((ref) => 'Hello Code Generation');
 
 @riverpod
 String goState(GoStateRef ref) {
   return 'Hello Code Generation';
+}
+
+@riverpod
+Future<int> goStateFuture(GoStateFutureRef ref) async {
+  await Future.delayed(const Duration(seconds: 2));
+  return 10;
+}
+
+@Riverpod(keepAlive: true)
+Future<int> goKeepAliveStateFuture(GoKeepAliveStateFutureRef ref) async {
+  await Future.delayed(const Duration(seconds: 2));
+  return 10;
 }
 
 /// 2) Parameter > Family 파라미터를 일반 함수처럼 사용할 수 있도록.
