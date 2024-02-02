@@ -29,7 +29,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       );
 
-      print(response.data);
       await storage.write(key: accessTokenKey, value: response.data['accessToken']);
 
       if (!mounted) return;

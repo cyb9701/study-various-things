@@ -33,7 +33,6 @@ class RestaurantScreen extends StatelessWidget {
         future: _paginateRestaurant(),
         builder: (context, AsyncSnapshot<List> snapshot) {
           if (snapshot.hasError) {
-            debugPrint(snapshot.error.toString());
             return const Icon(
               Icons.error,
               color: Colors.red,

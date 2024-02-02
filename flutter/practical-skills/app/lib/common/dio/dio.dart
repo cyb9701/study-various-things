@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:practical_skills/common/const/data.dart';
 
@@ -17,16 +18,14 @@ class CustomInterceptor extends Interceptor {
   /// 해더를 변경한다.
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    print('[REQUEST] [${options.method}] ${options.uri}');
+    debugPrint('[REQUEST] [${options.method}] ${options.uri}');
 
     if (options.headers['accessToken'] == true) {
-      print('1');
       // 해더 삭제.
       options.headers.remove('accessToken');
 
       // 실제 토큰으로 대체
       final token = await storage.read(key: accessTokenKey);
-      print(token);
       options.headers.addAll({
         authorization: '$bearer $token',
       });
@@ -47,11 +46,17 @@ class CustomInterceptor extends Interceptor {
   }
 
   /// 2) 응답을 받을 때
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    debugPrint('[RESPONSE] [${response.requestOptions.method}] ${response.requestOptions.uri}');
+
+    super.onResponse(response, handler);
+  }
 
   /// 3) 에러가 났을 때
   @override
   Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
-    print('[ERROR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
+    debugPrint('[ERROR] [${err.requestOptions.method}] ${err.requestOptions.uri}');
 
     _updateAccessToken(err, handler);
 
