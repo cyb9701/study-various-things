@@ -22,4 +22,6 @@ class RatingModel {
     required this.content,
     required this.imgUrls,
   });
+
+  factory RatingModel.fromJson(Map<String, dynamic> json) => _$RatingModelFromJson(json);
 }
