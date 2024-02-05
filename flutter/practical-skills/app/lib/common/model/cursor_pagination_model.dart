@@ -15,19 +15,19 @@ class CursorPaginationErrorState extends CursorPaginationBase {
 }
 
 // 로딩 진행 중.
-class CusorPaginationLoadingState extends CursorPaginationBase {}
+class CursorPaginationLoadingState extends CursorPaginationBase {}
 
 // 새로고침 진행 중.
-class CusorPaginationRefetchingState<T> extends CursorPaginationModel<T> {
-  CusorPaginationRefetchingState({
+class CursorPaginationRefetchingState<T> extends CursorPaginationModel<T> {
+  CursorPaginationRefetchingState({
     required super.meta,
     required super.data,
   });
 }
 
 // 추가 데이터 요청 진행 중.
-class CusorPaginationFetchingMoreState<T> extends CursorPaginationModel<T> {
-  CusorPaginationFetchingMoreState({
+class CursorPaginationFetchingMoreState<T> extends CursorPaginationModel<T> {
+  CursorPaginationFetchingMoreState({
     required super.meta,
     required super.data,
   });
@@ -45,6 +45,16 @@ class CursorPaginationModel<T> extends CursorPaginationBase {
     required this.data,
   });
 
+  CursorPaginationModel copyWith({
+    CursorPaginationMetaModel? meta,
+    List<T>? data,
+  }) {
+    return CursorPaginationModel(
+      meta: meta ?? this.meta,
+      data: data ?? this.data,
+    );
+  }
+
   factory CursorPaginationModel.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
@@ -61,6 +71,16 @@ class CursorPaginationMetaModel {
     required this.count,
     required this.hasMore,
   });
+
+  CursorPaginationMetaModel copyWith({
+    int? count,
+    bool? hasMore,
+  }) {
+    return CursorPaginationMetaModel(
+      count: count ?? this.count,
+      hasMore: hasMore ?? this.hasMore,
+    );
+  }
 
   factory CursorPaginationMetaModel.fromJson(Map<String, dynamic> json) =>
       _$CursorPaginationMetaModelFromJson(json);

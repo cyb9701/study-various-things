@@ -12,7 +12,8 @@ CursorPaginationModel<T> _$CursorPaginationModelFromJson<T>(
 ) =>
     CursorPaginationModel<T>(
       meta: CursorPaginationMetaModel.fromJson(
-          json['meta'] as Map<String, dynamic>),
+        json['meta'] as Map<String, dynamic>,
+      ),
       data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
     );
 
@@ -26,14 +27,16 @@ Map<String, dynamic> _$CursorPaginationModelToJson<T>(
     };
 
 CursorPaginationMetaModel _$CursorPaginationMetaModelFromJson(
-        Map<String, dynamic> json) =>
+  Map<String, dynamic> json,
+) =>
     CursorPaginationMetaModel(
       count: json['count'] as int,
       hasMore: json['hasMore'] as bool,
     );
 
 Map<String, dynamic> _$CursorPaginationMetaModelToJson(
-        CursorPaginationMetaModel instance) =>
+  CursorPaginationMetaModel instance,
+) =>
     <String, dynamic>{
       'count': instance.count,
       'hasMore': instance.hasMore,
