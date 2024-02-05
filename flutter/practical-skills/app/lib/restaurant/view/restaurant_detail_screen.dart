@@ -5,6 +5,7 @@ import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
 
 import '../../product/component/product_card.dart';
+import '../../rating/component/rating_card.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_model.dart';
 import '../provider/restaurant_provider.dart';
@@ -51,6 +52,18 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
             _renderLabel(),
             _renderProducts(products: restaurantDetailState.products),
           ],
+          const SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            sliver: SliverToBoxAdapter(
+              child: RatingCard(
+                avatarImage: AssetImage('assets/img/logo/codefactory_logo.png'),
+                images: [],
+                rating: 4,
+                email: 'email',
+                content: 'content',
+              ),
+            ),
+          )
         ],
       ),
     );
