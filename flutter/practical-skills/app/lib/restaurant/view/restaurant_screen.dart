@@ -57,7 +57,7 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
     // CursorPaginationFetchingMore.
     // CursorPaginationRefetching.
     else {
-      final data = (restaurantState as CursorPaginationModel).data;
+      final data = (restaurantState as CursorPagination).data;
 
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

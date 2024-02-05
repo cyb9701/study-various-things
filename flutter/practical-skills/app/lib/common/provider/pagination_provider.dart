@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/model/cursor_pagination_model.dart';
 import 'package:practical_skills/common/model/model_id.dart';
@@ -27,8 +28,8 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
      * 바로 반환하는 상황.
      */
       // 1) hasMore = false (기존 상태에서 이미 다음 데이터가 없다는 값을 들고 있다면)
-      if (state is CursorPaginationModel<T> && !forceRefetch) {
-        final paginationState = state as CursorPaginationModel<T>;
+      if (state is CursorPagination<T> && !forceRefetch) {
+        final paginationState = state as CursorPagination<T>;
         if (!paginationState.meta.hasMore) {
           return;
         }
@@ -59,7 +60,7 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
       // fetchMore
       // 데이터를 추갈 더 가져오는 상황
       if (fetchMore) {
-        final paginationState = state as CursorPaginationModel<T>;
+        final paginationState = state as CursorPagination<T>;
 
         // ui 업데이트.
         state = CursorPaginationFetchingMoreState(
@@ -75,8 +76,8 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
       // 데이터를 처음부터 가져오는 상황.
       else {
         // 만약에 데이터가 있는 상황이라면 기존 데이터로 보존한채로 Fetch를 진행.
-        if (state is CursorPaginationModel<T> && forceRefetch) {
-          final paginationState = state as CursorPaginationModel<T>;
+        if (state is CursorPagination<T> && forceRefetch) {
+          final paginationState = state as CursorPagination<T>;
           state = CursorPaginationRefetchingState(
             meta: paginationState.meta,
             data: paginationState.data,
@@ -101,7 +102,8 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
       } else {
         state = response;
       }
-    } catch (e) {
+    } catch (e, s) {
+      debugPrint(s.toString());
       state = CursorPaginationErrorState(message: '데이터를 가져오지 못했습니다.');
     }
   }

@@ -16,7 +16,7 @@ final restaurantProvider = StateNotifierProvider<RestaurantStateNotifier, Cursor
 
 final restaurantDetailProvider = Provider.family<RestaurantModel?, String>((ref, id) {
   final state = ref.watch(restaurantProvider);
-  if (state is! CursorPaginationModel) {
+  if (state is! CursorPagination) {
     return null;
   }
 
@@ -33,16 +33,16 @@ class RestaurantStateNotifier extends PaginationProvider<RestaurantModel, Restau
   }) async {
     // 만약에 아직 데이터가 하나도 없는 상태라면 (CursorPagination이 아니라면)
     // 데이터를 가져오는 시도를 한다.
-    if (state is! CursorPaginationModel) {
+    if (state is! CursorPagination) {
       await paginate();
     }
 
     // state가 CursorPagination이 아닐 때 그냥 리턴.
-    if (state is! CursorPaginationModel) {
+    if (state is! CursorPagination) {
       return;
     }
 
-    final paginationState = state as CursorPaginationModel;
+    final paginationState = state as CursorPagination;
 
     final response = await repository.getRestaurantDetail(rid: id);
 

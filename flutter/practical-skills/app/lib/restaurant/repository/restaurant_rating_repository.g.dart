@@ -19,7 +19,7 @@ class _RestaurantRatingRepository implements RestaurantRatingRepository {
   String? baseUrl;
 
   @override
-  Future<CursorPaginationModel<RatingModel>> paginate(
+  Future<CursorPagination<RatingModel>> paginate(
       {PaginationParams? paginationParams = const PaginationParams()}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -29,7 +29,7 @@ class _RestaurantRatingRepository implements RestaurantRatingRepository {
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CursorPaginationModel<RatingModel>>(Options(
+        _setStreamType<CursorPagination<RatingModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,7 +45,7 @@ class _RestaurantRatingRepository implements RestaurantRatingRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = CursorPaginationModel<RatingModel>.fromJson(
+    final value = CursorPagination<RatingModel>.fromJson(
       _result.data!,
       (json) => RatingModel.fromJson(json as Map<String, dynamic>),
     );

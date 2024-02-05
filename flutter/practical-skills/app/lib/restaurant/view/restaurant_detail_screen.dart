@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
+import 'package:practical_skills/common/model/cursor_pagination_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
 import 'package:practical_skills/restaurant/provider/restaurant_rating_provider.dart';
 
 import '../../product/component/product_card.dart';
 import '../../rating/component/rating_card.dart';
+import '../../rating/model/rating_model.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_model.dart';
 import '../provider/restaurant_provider.dart';
@@ -63,19 +65,8 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
                 ),
               ),
             ),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            sliver: SliverToBoxAdapter(
-              child: RatingCard(
-                avatarImage: AssetImage('assets/img/logo/codefactory_logo.png'),
-                images: [],
-                rating: 4,
-                email: 'email',
-                content:
-                    'content contentcontent content content content content content content content content content content content ',
-              ),
-            ),
-          )
+          if (ratingState is CursorPagination<RatingModel>)
+            _renderRatings(models: ratingState.data),
         ],
       ),
     );
@@ -121,6 +112,23 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
             );
           },
           childCount: products.length,
+        ),
+      ),
+    );
+  }
+
+  Widget _renderRatings({
+    required List<RatingModel> models,
+  }) {
+    return SliverPadding(
+      padding: const EdgeInsets.all(16),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: RatingCard.fromModel(model: models[index]),
+          ),
+          childCount: models.length,
         ),
       ),
     );

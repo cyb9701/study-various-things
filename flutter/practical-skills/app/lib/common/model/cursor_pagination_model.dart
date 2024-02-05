@@ -18,7 +18,7 @@ class CursorPaginationErrorState extends CursorPaginationBase {
 class CursorPaginationLoadingState extends CursorPaginationBase {}
 
 // 새로고침 진행 중.
-class CursorPaginationRefetchingState<T> extends CursorPaginationModel<T> {
+class CursorPaginationRefetchingState<T> extends CursorPagination<T> {
   CursorPaginationRefetchingState({
     required super.meta,
     required super.data,
@@ -26,7 +26,7 @@ class CursorPaginationRefetchingState<T> extends CursorPaginationModel<T> {
 }
 
 // 추가 데이터 요청 진행 중.
-class CursorPaginationFetchingMoreState<T> extends CursorPaginationModel<T> {
+class CursorPaginationFetchingMoreState<T> extends CursorPagination<T> {
   CursorPaginationFetchingMoreState({
     required super.meta,
     required super.data,
@@ -36,30 +36,30 @@ class CursorPaginationFetchingMoreState<T> extends CursorPaginationModel<T> {
 @JsonSerializable(
   genericArgumentFactories: true,
 )
-class CursorPaginationModel<T> extends CursorPaginationBase {
+class CursorPagination<T> extends CursorPaginationBase {
   final CursorPaginationMetaModel meta;
   final List<T> data;
 
-  CursorPaginationModel({
+  CursorPagination({
     required this.meta,
     required this.data,
   });
 
-  CursorPaginationModel copyWith({
+  CursorPagination copyWith({
     CursorPaginationMetaModel? meta,
     List<T>? data,
   }) {
-    return CursorPaginationModel(
+    return CursorPagination(
       meta: meta ?? this.meta,
       data: data ?? this.data,
     );
   }
 
-  factory CursorPaginationModel.fromJson(
+  factory CursorPagination.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
   ) =>
-      _$CursorPaginationModelFromJson(json, fromJsonT);
+      _$CursorPaginationFromJson(json, fromJsonT);
 }
 
 @JsonSerializable()

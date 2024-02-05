@@ -18,7 +18,7 @@ abstract class RestaurantRepository implements BasePaginationRepositoryInterface
   @Headers({
     'accessToken': true,
   })
-  Future<CursorPaginationModel<RestaurantModel>> paginate({
+  Future<CursorPagination<RestaurantModel>> paginate({
     @Queries() PaginationParams? paginationParams = const PaginationParams(),
   });
 

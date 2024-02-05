@@ -10,7 +10,7 @@ class RatingModel implements ModelIdInterface {
   @override
   final String id;
   final UserModel user;
-  final String rating;
+  final int rating;
   final String content;
   @JsonKey(
     fromJson: DataUtils.listPathsToUrls,
