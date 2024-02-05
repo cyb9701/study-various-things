@@ -83,7 +83,7 @@ class RestaurantStateNotifier extends StateNotifier<CursorPaginationBase> {
       // 데이터를 처음부터 가져오는 상황.
       else {
         // 만약에 데이터가 있는 상황이라면 기존 데이터로 보존한채로 Fetch를 진행.
-        if (state is CursorPaginationModel && !forceRefetch) {
+        if (state is CursorPaginationModel && forceRefetch) {
           final paginationState = state as CursorPaginationModel;
           state = CursorPaginationRefetchingState(
             meta: paginationState.meta,
