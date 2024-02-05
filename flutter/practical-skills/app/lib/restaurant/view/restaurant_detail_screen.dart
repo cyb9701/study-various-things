@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
+import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
-import 'package:practical_skills/restaurant/provider/restaurant_detail_provider.dart';
 
 import '../../product/component/product_card.dart';
 import '../component/restaurant_card.dart';
 import '../model/restaurant_model.dart';
+import '../provider/restaurant_provider.dart';
 
-class RastaurantDetailScreen extends ConsumerWidget {
+class RastaurantDetailScreen extends ConsumerStatefulWidget {
   final String id;
   final String name;
 
@@ -19,8 +20,19 @@ class RastaurantDetailScreen extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final restaurantDetailState = ref.watch(restaurantDetailProvider(id));
+  ConsumerState<RastaurantDetailScreen> createState() => _RastaurantDetailScreenState();
+}
+
+class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen> {
+  @override
+  void initState() {
+    ref.read(restaurantProvider.notifier).getDetail(id: widget.id);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final restaurantDetailState = ref.watch(restaurantDetailProvider(widget.id));
 
     if (restaurantDetailState == null) {
       return const DefaultLayout(
@@ -31,12 +43,14 @@ class RastaurantDetailScreen extends ConsumerWidget {
     }
 
     return DefaultLayout(
-      title: name,
+      title: widget.name,
       child: CustomScrollView(
         slivers: [
           _renderTop(model: restaurantDetailState),
-          _renderLabel(),
-          // _renderProducts(products: snapshot.data!.products),
+          if (restaurantDetailState is RestaurantDetailModel) ...[
+            _renderLabel(),
+            _renderProducts(products: restaurantDetailState.products),
+          ],
         ],
       ),
     );
