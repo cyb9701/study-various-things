@@ -4,6 +4,7 @@ import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_model.dart';
 
 class RastaurantCard extends StatelessWidget {
+  final String? heroKey;
   final Widget image;
   final String name;
   final List<String> tags;
@@ -16,6 +17,7 @@ class RastaurantCard extends StatelessWidget {
 
   const RastaurantCard({
     super.key,
+    this.heroKey,
     required this.image,
     required this.name,
     required this.tags,
@@ -32,6 +34,7 @@ class RastaurantCard extends StatelessWidget {
     bool isDetail = false,
   }) {
     return RastaurantCard(
+      heroKey: model.id,
       image: Image.network(
         model.thumbUrl,
         fit: BoxFit.cover,
@@ -53,10 +56,16 @@ class RastaurantCard extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: isDetail
-              ? image
+          child: heroKey != null
+              ? Hero(
+                  tag: ObjectKey(heroKey),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(isDetail ? 0 : 12),
+                    child: image,
+                  ),
+                )
               : ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(isDetail ? 0 : 12),
                   child: image,
                 ),
         ),
