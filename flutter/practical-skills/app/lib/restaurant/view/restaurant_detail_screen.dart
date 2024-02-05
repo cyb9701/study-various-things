@@ -16,12 +16,10 @@ import '../provider/restaurant_provider.dart';
 
 class RastaurantDetailScreen extends ConsumerStatefulWidget {
   final String id;
-  final String name;
 
   const RastaurantDetailScreen({
     super.key,
     required this.id,
-    required this.name,
   });
 
   @override
@@ -67,7 +65,7 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
     }
 
     return DefaultLayout(
-      title: widget.name,
+      title: restaurantDetailState.name,
       child: CustomScrollView(
         controller: _scrollController,
         slivers: [
