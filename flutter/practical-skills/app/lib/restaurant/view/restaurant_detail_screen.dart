@@ -6,6 +6,7 @@ import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
 import 'package:practical_skills/restaurant/provider/restaurant_rating_provider.dart';
 
+import '../../common/utils/pagination_utils.dart';
 import '../../product/component/product_card.dart';
 import '../../rating/component/rating_card.dart';
 import '../../rating/model/rating_model.dart';
@@ -28,10 +29,28 @@ class RastaurantDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen> {
+  final ScrollController _scrollController = ScrollController();
+
+  void _scrollListener() {
+    PagiantionUtils.paginate(
+      controller: _scrollController,
+      provider: ref.read(restaurantRatingProvider(widget.id).notifier),
+    );
+  }
+
   @override
   void initState() {
+    _scrollController.addListener(_scrollListener);
     ref.read(restaurantProvider.notifier).getDetail(id: widget.id);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController
+      ..removeListener(_scrollListener)
+      ..dispose();
+    super.dispose();
   }
 
   @override
@@ -50,6 +69,7 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
     return DefaultLayout(
       title: widget.name,
       child: CustomScrollView(
+        controller: _scrollController,
         slivers: [
           _renderTop(model: restaurantDetailState),
           if (restaurantDetailState is RestaurantDetailModel) ...[
