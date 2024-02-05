@@ -19,7 +19,6 @@ class _RestaurantScreenState extends ConsumerState<RestaurantScreen> {
   void _scrollListener() {
     // 현재 위치가 최대 길이보다 조금 덜되는 위치까지 왔다면 새로운 데이터를 추가 요청.
     if (_scrollController.offset > _scrollController.position.maxScrollExtent - 300) {
-      debugPrint('---ScrollListener---');
       ref.read(restaurantProvider.notifier).paginate(
             fetchMore: true,
           );

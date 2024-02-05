@@ -19,21 +19,23 @@ class _RestaurantRepository implements RestaurantRepository {
   String? baseUrl;
 
   @override
-  Future<CursorPaginationModel<RestaurantModel>> paginate(
-      {PaginationParams? paginationParams = const PaginationParams()}) async {
+  Future<CursorPaginationModel<RestaurantModel>> paginate({
+    PaginationParams? paginationParams = const PaginationParams(),
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.addAll(paginationParams?.toJson() ?? <String, dynamic>{});
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<CursorPaginationModel<RestaurantModel>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
+      _setStreamType<CursorPaginationModel<RestaurantModel>>(
+        Options(
+          method: 'GET',
+          headers: _headers,
+          extra: _extra,
+        )
             .compose(
               _dio.options,
               '/',
@@ -41,10 +43,13 @@ class _RestaurantRepository implements RestaurantRepository {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                baseUrl,
+              ),
+            ),
+      ),
+    );
     final value = CursorPaginationModel<RestaurantModel>.fromJson(
       _result.data!,
       (json) => RestaurantModel.fromJson(json as Map<String, dynamic>),
@@ -53,19 +58,21 @@ class _RestaurantRepository implements RestaurantRepository {
   }
 
   @override
-  Future<RestaurantDetailModel> getRestaurantDetail(
-      {required String rid}) async {
+  Future<RestaurantDetailModel> getRestaurantDetail({
+    required String rid,
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<RestaurantDetailModel>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
+      _setStreamType<RestaurantDetailModel>(
+        Options(
+          method: 'GET',
+          headers: _headers,
+          extra: _extra,
+        )
             .compose(
               _dio.options,
               '/${rid}',
@@ -73,10 +80,13 @@ class _RestaurantRepository implements RestaurantRepository {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                baseUrl,
+              ),
+            ),
+      ),
+    );
     final value = RestaurantDetailModel.fromJson(_result.data!);
     return value;
   }
