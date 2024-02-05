@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/colors.dart';
 
-import '../../product/view/project_tab.dart';
+import '../../product/view/project_screen.dart';
 import '../../restaurant/view/restaurant_screen.dart';
 import '../layout/default_layout.dart';
 
@@ -79,7 +79,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           RestaurantScreen(),
-          ProductTab(),
+          ProductScreen(),
           Text(
             '3',
           ),
