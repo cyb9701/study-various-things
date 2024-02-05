@@ -51,7 +51,16 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
           if (restaurantDetailState is RestaurantDetailModel) ...[
             _renderLabel(),
             _renderProducts(products: restaurantDetailState.products),
-          ],
+          ] else
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              sliver: SliverToBoxAdapter(
+                child: Container(
+                  height: 200,
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+              ),
+            ),
           const SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             sliver: SliverToBoxAdapter(
