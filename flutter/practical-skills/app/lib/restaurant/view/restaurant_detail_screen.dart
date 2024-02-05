@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
+import 'package:practical_skills/restaurant/provider/restaurant_rating_provider.dart';
 
 import '../../product/component/product_card.dart';
 import '../../rating/component/rating_card.dart';
@@ -34,6 +35,7 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
   @override
   Widget build(BuildContext context) {
     final restaurantDetailState = ref.watch(restaurantDetailProvider(widget.id));
+    final ratingState = ref.watch(restaurantRatingProvider(widget.id));
 
     if (restaurantDetailState == null) {
       return const DefaultLayout(

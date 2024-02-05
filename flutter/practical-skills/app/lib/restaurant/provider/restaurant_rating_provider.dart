@@ -1,9 +1,20 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/model/cursor_pagination_model.dart';
-import 'package:practical_skills/common/repository/base_pagination_repository.dart';
+import 'package:practical_skills/common/provider/pagination_provider.dart';
+import 'package:practical_skills/rating/model/rating_model.dart';
+import 'package:practical_skills/restaurant/provider/restaurant_rating_repository_provider.dart';
+import 'package:practical_skills/restaurant/repository/restaurant_rating_repository.dart';
 
-class RestaurantRatingStateNotifier extends StateNotifier<CursorPaginationBase> {
-  final BasePaginationRepositoryInterface repository;
+final restaurantRatingProvider =
+    StateNotifierProvider.family<RestaurantRatingStateNotifier, CursorPaginationBase, String>(
+        (ref, id) {
+  final repository = ref.watch(restaurantRatingRepositoryProvider(id));
+  final notifier = RestaurantRatingStateNotifier(repository: repository);
+  return notifier;
+});
 
-  RestaurantRatingStateNotifier({required this.repository}) : super(CursorPaginationLoadingState());
+class RestaurantRatingStateNotifier
+    extends PaginationProvider<RatingModel, RestaurantRatingRepository> {
+  @override
+  RestaurantRatingStateNotifier({required super.repository});
 }

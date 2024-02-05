@@ -9,7 +9,9 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
     extends StateNotifier<CursorPaginationBase> {
   final U repository;
 
-  PaginationProvider({required this.repository}) : super(CursorPaginationLoadingState());
+  PaginationProvider({required this.repository}) : super(CursorPaginationLoadingState()) {
+    paginate();
+  }
 
   Future<void> paginate({
     int fetchCount = 20,
