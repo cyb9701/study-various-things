@@ -20,13 +20,14 @@ class RatingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _Header(
           avatarImage: avatarImage,
           rating: rating,
           email: email,
         ),
-        const _Body(),
+        _Body(content: content),
         const _Images(),
       ],
     );
@@ -76,11 +77,25 @@ class _Header extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body();
+  final String content;
+  const _Body({
+    required this.content,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Text(
+        content,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          fontSize: 14,
+          color: bodyTextColor,
+        ),
+      ),
+    );
   }
 }
 

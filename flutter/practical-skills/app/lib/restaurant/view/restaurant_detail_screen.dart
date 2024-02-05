@@ -60,7 +60,8 @@ class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen>
                 images: [],
                 rating: 4,
                 email: 'email',
-                content: 'content',
+                content:
+                    'content contentcontent content content content content content content content content content content content ',
               ),
             ),
           )
