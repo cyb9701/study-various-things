@@ -8,20 +8,21 @@ class PathParamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultLayout(
-        child: ListView(
-      children: [
-        Text(
-          'Path Param : ${GoRouterState.of(context).pathParameters}',
-        ),
-        ElevatedButton(
-          onPressed: () {
-            context.go('/path_param/123/code-factory');
-          },
-          child: const Text(
-            'Go Path Param With Name',
+      child: ListView(
+        children: [
+          Text(
+            'Path Param : ${GoRouterState.of(context).pathParameters}',
           ),
-        ),
-      ],
-    ));
+          ElevatedButton(
+            onPressed: () {
+              context.go('/path_param/123/code-factory');
+            },
+            child: const Text(
+              'Go Path Param With Name',
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -7,6 +7,8 @@ import 'package:go_router_playground/screens/5_pop_return_screen.dart';
 import 'package:go_router_playground/screens/6_path_param_screen.dart';
 import 'package:go_router_playground/screens/root_screen.dart';
 
+import '../screens/7_query_param_screen.dart';
+
 // https://blog.codefactory.ai -> "/"" -> path
 // https://blog.codefactory.ai/flutter -> "/flutter"
 final router = GoRouter(
@@ -72,6 +74,12 @@ final router = GoRouter(
               },
             ),
           ],
+        ),
+        GoRoute(
+          path: 'query_param',
+          builder: (context, state) {
+            return const QueryParamScreen();
+          },
         ),
       ],
     ),
