@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_router_playground/screens/10_error_screen.dart';
 import 'package:go_router_playground/screens/1_basic_screen.dart';
 import 'package:go_router_playground/screens/2_named_screen.dart';
 import 'package:go_router_playground/screens/3_push_screen.dart';
@@ -202,4 +203,7 @@ final router = GoRouter(
       ],
     ),
   ],
+  errorBuilder: (context, state) {
+    return ErrorScreen(error: state.error.toString());
+  },
 );
