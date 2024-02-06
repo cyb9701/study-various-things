@@ -19,7 +19,7 @@ class ProductScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => RastaurantDetailScreen(
+                builder: (context) => RestaurantDetailScreen(
                   id: model.restaurant.id,
                 ),
               ),

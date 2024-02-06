@@ -14,6 +14,8 @@ import '../../common/const/colors.dart';
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
+  static const routeName = 'login';
+
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }

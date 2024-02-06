@@ -14,19 +14,19 @@ import '../component/restaurant_card.dart';
 import '../model/restaurant_model.dart';
 import '../provider/restaurant_provider.dart';
 
-class RastaurantDetailScreen extends ConsumerStatefulWidget {
+class RestaurantDetailScreen extends ConsumerStatefulWidget {
   final String id;
 
-  const RastaurantDetailScreen({
+  const RestaurantDetailScreen({
     super.key,
     required this.id,
   });
 
   @override
-  ConsumerState<RastaurantDetailScreen> createState() => _RastaurantDetailScreenState();
+  ConsumerState<RestaurantDetailScreen> createState() => _RastaurantDetailScreenState();
 }
 
-class _RastaurantDetailScreenState extends ConsumerState<RastaurantDetailScreen> {
+class _RastaurantDetailScreenState extends ConsumerState<RestaurantDetailScreen> {
   final ScrollController _scrollController = ScrollController();
 
   void _scrollListener() {

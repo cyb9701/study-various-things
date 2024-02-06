@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'common/view/slapsh_screen.dart';
+import 'package:practical_skills/common/provider/router_provider.dart';
 
 void main() {
   runApp(
@@ -11,17 +10,17 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: ref.watch(routerProvider),
       theme: ThemeData(
         fontFamily: 'NotoSans',
       ),
-      home: const SplashScreen(),
     );
   }
 }

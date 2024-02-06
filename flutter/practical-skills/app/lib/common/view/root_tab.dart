@@ -8,6 +8,8 @@ import '../layout/default_layout.dart';
 class RootTab extends StatefulWidget {
   const RootTab({super.key});
 
+  static const routeName = 'root-tab';
+
   @override
   State<RootTab> createState() => _RootTabState();
 }
