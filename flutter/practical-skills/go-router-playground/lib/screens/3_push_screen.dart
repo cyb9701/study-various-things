@@ -25,7 +25,7 @@ class PushScreen extends StatelessWidget {
               context.go('/basic');
             },
             child: const Text(
-              'Go Basic',
+              'Go Basic Screen',
             ),
           ),
           ElevatedButton(
@@ -37,7 +37,7 @@ class PushScreen extends StatelessWidget {
               context.push('/basic');
             },
             child: const Text(
-              'Push Basic',
+              'Push Basic Screen',
             ),
           ),
         ],

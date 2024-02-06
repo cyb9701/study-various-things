@@ -8,7 +8,7 @@ class NamedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DefaultLayout(
       child: Center(
-        child: Text('Named'),
+        child: Text('Named Screen'),
       ),
     );
   }

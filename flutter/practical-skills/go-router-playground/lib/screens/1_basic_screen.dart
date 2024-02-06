@@ -8,7 +8,7 @@ class BasicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DefaultLayout(
       child: Center(
-        child: Text('Basic'),
+        child: Text('Basic Screen'),
       ),
     );
   }
