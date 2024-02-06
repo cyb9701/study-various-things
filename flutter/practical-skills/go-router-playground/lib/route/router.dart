@@ -4,6 +4,7 @@ import 'package:go_router_playground/screens/2_named_screen.dart';
 import 'package:go_router_playground/screens/3_push_screen.dart';
 import 'package:go_router_playground/screens/4_pop_base_screen.dart';
 import 'package:go_router_playground/screens/5_pop_return_screen.dart';
+import 'package:go_router_playground/screens/6_path_param_screen.dart';
 import 'package:go_router_playground/screens/root_screen.dart';
 
 // https://blog.codefactory.ai -> "/"" -> path
@@ -24,7 +25,6 @@ final router = GoRouter(
         ),
         GoRoute(
           path: 'named',
-
           /**
            * path가 너무 길어졌을 때 유용하다.
            * 
@@ -52,6 +52,23 @@ final router = GoRouter(
               path: 'return',
               builder: (context, state) {
                 return const PopReturnScreen();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          /**
+           * /path_param/123
+           */
+          path: 'path_param/:id',
+          builder: (context, state) {
+            return const PathParamScreen();
+          },
+          routes: [
+            GoRoute(
+              path: ':name',
+              builder: (context, state) {
+                return const PathParamScreen();
               },
             ),
           ],
