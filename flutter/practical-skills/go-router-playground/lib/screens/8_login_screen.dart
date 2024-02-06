@@ -19,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         ElevatedButton(
           onPressed: () {
-            if (GoRouterState.of(context).matchedLocation == '/login') {
+            if (GoRouterState.of(context).uri.toString() == '/login') {
               context.go('/login/private');
             } else {
               context.go('/login2/private');

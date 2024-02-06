@@ -23,7 +23,7 @@ bool authState = false;
 // https://blog.codefactory.ai/flutter -> "/flutter"
 final router = GoRouter(
   redirect: (context, state) {
-    if (state.matchedLocation == '/login/private' && !authState) {
+    if (state.uri.toString() == '/login/private' && !authState) {
       return '/login';
     }
 
