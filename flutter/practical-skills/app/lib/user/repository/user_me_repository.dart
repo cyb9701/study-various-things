@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart' hide Headers;
+import 'package:practical_skills/user/model/basket_item_model.dart';
+import 'package:practical_skills/user/model/path_basket_body.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../model/user_model.dart';
@@ -14,4 +16,18 @@ abstract class UserMeRepository {
     'accessToken': true,
   })
   Future<UserModel> getMe();
+
+  @GET('/basket')
+  @Headers({
+    'accessToken': true,
+  })
+  Future<List<BasketItemModel>> getBasket();
+
+  @PATCH('/basket')
+  @Headers({
+    'accessToken': true,
+  })
+  Future<List<BasketItemModel>> getBasket(){
+    @Body() required PathBasketBody body;
+  }
 }
