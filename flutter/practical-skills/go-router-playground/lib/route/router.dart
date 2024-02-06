@@ -7,13 +7,25 @@ import 'package:go_router_playground/screens/4_pop_return_screen.dart';
 import 'package:go_router_playground/screens/5_path_param_screen.dart';
 import 'package:go_router_playground/screens/7_nested_child_screen.dart';
 import 'package:go_router_playground/screens/7_nested_screen.dart';
+import 'package:go_router_playground/screens/8_login_screen.dart';
+import 'package:go_router_playground/screens/8_private_screen.dart';
 import 'package:go_router_playground/screens/root_screen.dart';
 
 import '../screens/6_query_param_screen.dart';
 
+// 로그인 유무.
+bool authState = false;
+
 // https://blog.codefactory.ai -> "/"" -> path
 // https://blog.codefactory.ai/flutter -> "/flutter"
 final router = GoRouter(
+  redirect: (context, state) {
+    if (state.matchedLocation == '/login/private' && !authState) {
+      return '/login';
+    }
+
+    return null;
+  },
   routes: [
     GoRoute(
       path: '/',
@@ -116,6 +128,48 @@ final router = GoRouter(
                 return const NestedChildScreen(
                   routeName: '/nested/c',
                 );
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'login',
+          builder: (context, state) {
+            return const LoginScreen();
+          },
+          routes: [
+            GoRoute(
+              path: 'private',
+              builder: (context, state) {
+                return const PrivateScreen();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'login2',
+          builder: (context, state) {
+            return const LoginScreen();
+          },
+          routes: [
+            GoRoute(
+              path: 'private',
+              builder: (context, state) {
+                return const PrivateScreen();
+              },
+
+              /**
+               * 방법.
+               * 
+               * 1) 모든 라우트에 적용이 되는 방법.
+               * 2) 각각의 라우트에만 적용이 되는 방법.
+               */
+              redirect: (context, state) {
+                if (!authState) {
+                  return '/login2';
+                }
+
+                return null;
               },
             ),
           ],
