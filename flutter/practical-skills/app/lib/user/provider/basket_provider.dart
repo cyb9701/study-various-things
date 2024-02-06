@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:practical_skills/common/dio/dio_provider.dart';
 import 'package:practical_skills/product/model/product_model.dart';
 import 'package:practical_skills/user/model/basket_item_model.dart';
 
 final basketProvider = StateNotifierProvider<BasketStateNotifier, List<BasketItemModel>>((ref) {
+  final dio = ref.watch(dioProvider);
   return BasketStateNotifier();
 });
 

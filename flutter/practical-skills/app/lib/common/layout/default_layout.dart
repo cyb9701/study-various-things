@@ -5,6 +5,7 @@ class DefaultLayout extends StatelessWidget {
   final Widget? bottomNavigationBar;
   final String? title;
   final Color backgroundColor;
+  final Widget? floatingActionButton;
 
   const DefaultLayout({
     super.key,
@@ -12,11 +13,13 @@ class DefaultLayout extends StatelessWidget {
     this.bottomNavigationBar,
     this.title,
     this.backgroundColor = Colors.white,
+    this.floatingActionButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: floatingActionButton,
       backgroundColor: backgroundColor,
       appBar: _renderAppBar(),
       body: child,
