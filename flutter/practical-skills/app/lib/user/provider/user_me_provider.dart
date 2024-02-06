@@ -35,17 +35,21 @@ class UserMeStateNotifier extends StateNotifier<UserModelBase?> {
   }
 
   Future<void> getMe() async {
-    final refreshToken = await storage.read(key: refreshTokenKey);
-    final accessToken = await storage.read(key: accessTokenKey);
+    try {
+      final refreshToken = await storage.read(key: refreshTokenKey);
+      final accessToken = await storage.read(key: accessTokenKey);
 
-    if (refreshToken == null || accessToken == null) {
-      state = null;
-      return;
+      if (refreshToken == null || accessToken == null) {
+        state = null;
+        return;
+      }
+
+      final response = await userMeRepository.getMe();
+
+      state = response;
+    } catch (_) {
+      state = UserModelError(message: '로그인 실패했습니다.');
     }
-
-    final response = await userMeRepository.getMe();
-
-    state = response;
   }
 
   Future<UserModelBase> login({

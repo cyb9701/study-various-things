@@ -25,23 +25,22 @@ class _UserMeRepository implements UserMeRepository {
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+        .compose(
+          _dio.options,
+          '/',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
     final value = UserModel.fromJson(_result.data!);
     return value;
   }
