@@ -28,6 +28,6 @@ abstract class UserMeRepository {
     'accessToken': true,
   })
   Future<List<BasketItemModel>> patchBasket({
-    @Body() required PathBasketBody body,
+    @Body() required PatchBasketBody body,
   });
 }
