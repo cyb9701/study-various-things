@@ -1,13 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:practical_skills/common/const/data.dart';
+import 'package:practical_skills/user/provider/auth_provider.dart';
 
 class CustomInterceptor extends Interceptor {
   final FlutterSecureStorage storage;
+  final Ref ref;
 
   CustomInterceptor({
     required this.storage,
+    required this.ref,
   });
 
   /// 1) 요청을 보낼 때
@@ -108,6 +112,7 @@ class CustomInterceptor extends Interceptor {
           final newResponse = await dio.fetch(options);
           return handler.resolve(newResponse);
         } on DioException catch (e) {
+          ref.read(authProvider.notifier).logout();
           return handler.reject(e);
         }
       }

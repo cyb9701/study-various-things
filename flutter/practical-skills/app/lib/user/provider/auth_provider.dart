@@ -52,6 +52,10 @@ class AuthProvider extends ChangeNotifier {
         ),
       ];
 
+  void logout() {
+    ref.read(userMeProvider.notifier).logout();
+  }
+
   String? redirectLogic(GoRouterState state) {
     final location = state.uri.toString();
 

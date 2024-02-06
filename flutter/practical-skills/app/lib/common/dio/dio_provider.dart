@@ -11,6 +11,7 @@ final dioProvider = Provider<Dio>((ref) {
   dio.interceptors.add(
     CustomInterceptor(
       storage: storage,
+      ref: ref,
     ),
   );
 
