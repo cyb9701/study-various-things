@@ -206,4 +206,9 @@ final router = GoRouter(
   errorBuilder: (context, state) {
     return ErrorScreen(error: state.error.toString());
   },
+
+  /**
+   * 단순 개발 로그 확인 용도.
+   */
+  debugLogDiagnostics: true,
 );
