@@ -22,6 +22,8 @@ class RestaurantDetailScreen extends ConsumerStatefulWidget {
     required this.id,
   });
 
+  static const routeName = 'restaurantDetail';
+
   @override
   ConsumerState<RestaurantDetailScreen> createState() => _RastaurantDetailScreenState();
 }
