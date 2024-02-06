@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router_playground/screens/1_basic_screen.dart';
 import 'package:go_router_playground/screens/2_named_screen.dart';
@@ -9,6 +10,8 @@ import 'package:go_router_playground/screens/7_nested_child_screen.dart';
 import 'package:go_router_playground/screens/7_nested_screen.dart';
 import 'package:go_router_playground/screens/8_login_screen.dart';
 import 'package:go_router_playground/screens/8_private_screen.dart';
+import 'package:go_router_playground/screens/9_transition_screen_1.dart';
+import 'package:go_router_playground/screens/9_transition_screen_2.dart';
 import 'package:go_router_playground/screens/root_screen.dart';
 
 import '../screens/6_query_param_screen.dart';
@@ -170,6 +173,28 @@ final router = GoRouter(
                 }
 
                 return null;
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'transition',
+          builder: (context, state) {
+            return const TransitionScreenOne();
+          },
+          routes: [
+            GoRoute(
+              path: 'detail',
+              pageBuilder: (context, state) {
+                return CustomTransitionPage(
+                  child: const TransitionScreenTwo(),
+                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                );
               },
             ),
           ],
