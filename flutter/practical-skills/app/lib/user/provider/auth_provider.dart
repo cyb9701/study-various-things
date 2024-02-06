@@ -54,7 +54,7 @@ class AuthProvider extends ChangeNotifier {
   String? redirectLogic(GoRouterState state) {
     final location = state.uri.toString();
 
-    final userState = ref.read(userMeProvider);
+    final UserModelBase? userState = ref.read(userMeProvider);
 
     final logginIn = location == '/login';
 
@@ -63,7 +63,6 @@ class AuthProvider extends ChangeNotifier {
     if (userState == null) {
       return logginIn ? null : '/login';
     }
-
     // user가 null이 아님.
 
     // UserModel
@@ -78,7 +77,6 @@ class AuthProvider extends ChangeNotifier {
     if (userState is UserModelError) {
       return !logginIn ? '/login' : null;
     }
-
     return null;
   }
 }

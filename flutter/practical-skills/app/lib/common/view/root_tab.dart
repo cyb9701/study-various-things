@@ -3,6 +3,7 @@ import 'package:practical_skills/common/const/colors.dart';
 
 import '../../product/view/product_screen.dart';
 import '../../restaurant/view/restaurant_screen.dart';
+import '../../user/view/profile_screen.dart';
 import '../layout/default_layout.dart';
 
 class RootTab extends StatefulWidget {
@@ -85,9 +86,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
           Text(
             '3',
           ),
-          Text(
-            '4',
-          ),
+          ProfileScreen(),
         ],
       ),
     );
