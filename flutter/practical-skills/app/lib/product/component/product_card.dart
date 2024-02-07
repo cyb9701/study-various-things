@@ -71,10 +71,10 @@ class ProductCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final basket = ref.watch(basketProvider);
 
-    return IntrinsicHeight(
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        IntrinsicHeight(
+          child: Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 16),
@@ -117,8 +117,11 @@ class ProductCard extends ConsumerWidget {
               )
             ],
           ),
-          if (onSubtract != null && onAdd != null)
-            _Footer(
+        ),
+        if (onSubtract != null && onAdd != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: _Footer(
               total: (basket.firstWhere((e) => e.product.id == id).count *
                       basket.firstWhere((e) => e.product.id == id).product.price)
                   .toString(),
@@ -126,8 +129,8 @@ class ProductCard extends ConsumerWidget {
               onSubtract: onSubtract!,
               onAdd: onAdd!,
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
@@ -164,11 +167,14 @@ class _Footer extends StatelessWidget {
               icon: Icons.remove_rounded,
               onTap: onSubtract,
             ),
-            Text(
-              '$count',
-              style: const TextStyle(
-                color: primaryColor,
-                fontWeight: FontWeight.w500,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                '$count',
+                style: const TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             renderButton(
