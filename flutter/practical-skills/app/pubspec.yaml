@@ -43,6 +43,7 @@ dependencies:
   collection:
   go_router: ^13.1.0
   badges: ^3.1.2
+  uuid:
 
 dev_dependencies:
   flutter_test:
