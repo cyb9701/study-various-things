@@ -24,14 +24,13 @@ class _UserMeRepository implements UserMeRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-      _setStreamType<UserModel>(
-        Options(
-          method: 'GET',
-          headers: _headers,
-          extra: _extra,
-        )
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<UserModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
             .compose(
               _dio.options,
               '/',
@@ -39,13 +38,10 @@ class _UserMeRepository implements UserMeRepository {
               data: _data,
             )
             .copyWith(
-              baseUrl: _combineBaseUrls(
-                _dio.options.baseUrl,
-                baseUrl,
-              ),
-            ),
-      ),
-    );
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = UserModel.fromJson(_result.data!);
     return value;
   }
@@ -56,14 +52,13 @@ class _UserMeRepository implements UserMeRepository {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-      _setStreamType<List<BasketItemModel>>(
-        Options(
-          method: 'GET',
-          headers: _headers,
-          extra: _extra,
-        )
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<BasketItemModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
             .compose(
               _dio.options,
               '/basket',
@@ -71,13 +66,10 @@ class _UserMeRepository implements UserMeRepository {
               data: _data,
             )
             .copyWith(
-              baseUrl: _combineBaseUrls(
-                _dio.options.baseUrl,
-                baseUrl,
-              ),
-            ),
-      ),
-    );
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     var value = _result.data!
         .map((dynamic i) => BasketItemModel.fromJson(i as Map<String, dynamic>))
         .toList();
@@ -85,22 +77,20 @@ class _UserMeRepository implements UserMeRepository {
   }
 
   @override
-  Future<List<BasketItemModel>> patchBasket({
-    required PatchBasketBody body,
-  }) async {
+  Future<List<BasketItemModel>> patchBasket(
+      {required PatchBasketBody body}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _result = await _dio.fetch<List<dynamic>>(
-      _setStreamType<List<BasketItemModel>>(
-        Options(
-          method: 'PATCH',
-          headers: _headers,
-          extra: _extra,
-        )
+    final _result = await _dio
+        .fetch<List<dynamic>>(_setStreamType<List<BasketItemModel>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
             .compose(
               _dio.options,
               '/basket',
@@ -108,13 +98,10 @@ class _UserMeRepository implements UserMeRepository {
               data: _data,
             )
             .copyWith(
-              baseUrl: _combineBaseUrls(
-                _dio.options.baseUrl,
-                baseUrl,
-              ),
-            ),
-      ),
-    );
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     var value = _result.data!
         .map((dynamic i) => BasketItemModel.fromJson(i as Map<String, dynamic>))
         .toList();
