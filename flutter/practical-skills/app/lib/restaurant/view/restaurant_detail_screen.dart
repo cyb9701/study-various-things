@@ -2,6 +2,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practical_skills/common/const/colors.dart';
 import 'package:practical_skills/common/layout/default_layout.dart';
 import 'package:practical_skills/common/model/cursor_pagination_model.dart';
@@ -9,6 +10,7 @@ import 'package:practical_skills/product/model/product_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_detail_model.dart';
 import 'package:practical_skills/restaurant/model/restaurant_product_model.dart';
 import 'package:practical_skills/restaurant/provider/restaurant_rating_provider.dart';
+import 'package:practical_skills/restaurant/view/basket_screen.dart';
 import 'package:practical_skills/user/provider/basket_provider.dart';
 
 import '../../common/utils/pagination_utils.dart';
@@ -188,7 +190,9 @@ class _BasketFloatingButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final basket = ref.watch(basketProvider);
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () {
+        context.pushNamed(BasketScreen.routeName);
+      },
       backgroundColor: primaryColor,
       child: badges.Badge(
         showBadge: basket.isNotEmpty,
