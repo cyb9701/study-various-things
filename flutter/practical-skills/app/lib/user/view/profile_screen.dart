@@ -7,11 +7,13 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ElevatedButton(
-      onPressed: () {
-        ref.read(userMeProvider.notifier).logout();
-      },
-      child: const Text('logout'),
+    return Center(
+      child: ElevatedButton(
+        onPressed: () {
+          ref.read(userMeProvider.notifier).logout();
+        },
+        child: const Text('logout'),
+      ),
     );
   }
 }

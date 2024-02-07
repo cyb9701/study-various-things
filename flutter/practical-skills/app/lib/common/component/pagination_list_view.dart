@@ -72,24 +72,32 @@ class _PaginationListViewState<T extends ModelIdInterface>
     else {
       final data = (state as CursorPagination<T>).data;
 
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView.separated(
-          controller: _scrollController,
-          itemCount: data.length + 1,
-          separatorBuilder: (context, index) => const SizedBox(height: 20),
-          itemBuilder: (context, index) {
-            if (index == data.length) {
-              return Center(
-                child: state is CursorPaginationFetchingMoreState
-                    ? const CircularProgressIndicator()
-                    : const Text('마지막 데이터'),
+      return RefreshIndicator(
+        onRefresh: () async {
+          ref.read(widget.provider.notifier).paginate(
+                forceRefetch: true,
               );
-            }
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: ListView.separated(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: _scrollController,
+            itemCount: data.length + 1,
+            separatorBuilder: (context, index) => const SizedBox(height: 20),
+            itemBuilder: (context, index) {
+              if (index == data.length) {
+                return Center(
+                  child: state is CursorPaginationFetchingMoreState
+                      ? const CircularProgressIndicator()
+                      : const Text('마지막 데이터'),
+                );
+              }
 
-            final model = data[index];
-            return widget.itemBuilder(context, index, model);
-          },
+              final model = data[index];
+              return widget.itemBuilder(context, index, model);
+            },
+          ),
         ),
       );
     }
