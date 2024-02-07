@@ -34,7 +34,7 @@ class OrderStateNotifier extends StateNotifier<List<OrderModel>> {
         body: PostOrderBody(
           id: id,
           products: basketState
-              .map(
+              .map<PostOrderBodyProduct>(
                 (e) => PostOrderBodyProduct(
                   productId: e.product.id,
                   count: e.count,
