@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/product/model/product_model.dart';
 import 'package:practical_skills/user/model/basket_item_model.dart';
@@ -14,9 +15,18 @@ final basketProvider = StateNotifierProvider<BasketStateNotifier, List<BasketIte
 class BasketStateNotifier extends StateNotifier<List<BasketItemModel>> {
   final UserMeRepository repository;
 
-  BasketStateNotifier({required this.repository}) : super([]);
+  final updateBasketDebounce = Debouncer(
+    const Duration(seconds: 1),
+    initialValue: null,
+    checkEquality: false,
+  );
+  BasketStateNotifier({required this.repository}) : super([]) {
+    updateBasketDebounce.values.listen((event) {
+      _patchBasket();
+    });
+  }
 
-  Future<void> _pathBasket() async {
+  Future<void> _patchBasket() async {
     await repository.patchBasket(
       body: PatchBasketBody(
         basket: state
@@ -58,7 +68,7 @@ class BasketStateNotifier extends StateNotifier<List<BasketItemModel>> {
 
     // optimistic response : 긍정적 응답
     // 응답이 성공할거라고 가정하고 상태를 먼저 업데이트함.
-    await _pathBasket();
+    updateBasketDebounce.setValue(null);
   }
 
   Future<void> removeFromBasket({
@@ -90,6 +100,6 @@ class BasketStateNotifier extends StateNotifier<List<BasketItemModel>> {
       return;
     }
 
-    await _pathBasket();
+    updateBasketDebounce.setValue(null);
   }
 }
