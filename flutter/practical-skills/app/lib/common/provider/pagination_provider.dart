@@ -1,3 +1,4 @@
+import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:practical_skills/common/model/cursor_pagination_model.dart';
@@ -10,8 +11,17 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
     extends StateNotifier<CursorPaginationBase> {
   final U repository;
 
+  final paginationThrttole = Throttle(
+    const Duration(seconds: 3),
+    initialValue: _PaginationInfo(),
+    checkEquality: false,
+  );
+
   PaginationProvider({required this.repository}) : super(CursorPaginationLoadingState()) {
     paginate();
+    paginationThrttole.values.listen((event) {
+      _throttledPagination(event);
+    });
   }
 
   Future<void> paginate({
@@ -23,6 +33,20 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
     // 강제로 다시 로딩.
     bool forceRefetch = false,
   }) async {
+    paginationThrttole.setValue(
+      _PaginationInfo(
+        fetchCount: fetchCount,
+        fetchMore: fetchMore,
+        forceRefetch: forceRefetch,
+      ),
+    );
+  }
+
+  void _throttledPagination(_PaginationInfo info) async {
+    final fetchCount = info.fetchCount;
+    final fetchMore = info.fetchMore;
+    final forceRefetch = info.forceRefetch;
+
     try {
       /**
      * 바로 반환하는 상황.
@@ -107,4 +131,16 @@ class PaginationProvider<T extends ModelIdInterface, U extends BasePaginationRep
       state = CursorPaginationErrorState(message: '데이터를 가져오지 못했습니다.');
     }
   }
+}
+
+class _PaginationInfo {
+  final int fetchCount;
+  final bool fetchMore;
+  final bool forceRefetch;
+
+  _PaginationInfo({
+    this.fetchCount = 20,
+    this.fetchMore = false,
+    this.forceRefetch = false,
+  });
 }
