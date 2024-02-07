@@ -28,6 +28,7 @@ class OrderCard extends StatelessWidget {
       orderDate: model.createdAt,
       image: Image.network(
         model.restaurant.thumbUrl,
+        width: 50,
         height: 50,
         fit: BoxFit.cover,
       ),
@@ -40,30 +41,33 @@ class OrderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '${orderDate.year}.${orderDate.month.toString().padLeft(2, '0')}.${orderDate.day.toString().padLeft(2, '0')} 주문완료',
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Text(
+            '${orderDate.year}.${orderDate.month.toString().padLeft(2, '0')}.${orderDate.day.toString().padLeft(2, '0')} 주문완료',
+          ),
         ),
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(right: 8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
                 child: image,
               ),
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
                 ),
                 Text(
                   '$productsDetail $price원',
                   style: const TextStyle(
+                    fontSize: 12,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
