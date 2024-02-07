@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practical_skills/common/const/colors.dart';
 
+import '../../order/view/order_serceen.dart';
 import '../../product/view/product_screen.dart';
 import '../../restaurant/view/restaurant_screen.dart';
 import '../../user/view/profile_screen.dart';
@@ -83,9 +84,7 @@ class _RootTabState extends State<RootTab> with SingleTickerProviderStateMixin {
         children: const [
           RestaurantScreen(),
           ProductScreen(),
-          Text(
-            '3',
-          ),
+          OrderScreen(),
           ProfileScreen(),
         ],
       ),

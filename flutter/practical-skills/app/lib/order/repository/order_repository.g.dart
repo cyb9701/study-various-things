@@ -19,19 +19,23 @@ class _OrderRepository implements OrderRepository {
   String? baseUrl;
 
   @override
-  Future<OrderModel> postOrder({required PostOrderBody body}) async {
+  Future<CursorPagination<OrderModel>> paginate({
+    PaginationParams? paginationParams = const PaginationParams(),
+  }) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(paginationParams?.toJson() ?? <String, dynamic>{});
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{r'accessToken': true};
     _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<OrderModel>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<CursorPagination<OrderModel>>(
+        Options(
+          method: 'GET',
+          headers: _headers,
+          extra: _extra,
+        )
             .compose(
               _dio.options,
               '/',
@@ -39,10 +43,49 @@ class _OrderRepository implements OrderRepository {
               data: _data,
             )
             .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                baseUrl,
+              ),
+            ),
+      ),
+    );
+    final value = CursorPagination<OrderModel>.fromJson(
+      _result.data!,
+      (json) => OrderModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<OrderModel> postOrder({required PostOrderBody body}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': true};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+      _setStreamType<OrderModel>(
+        Options(
+          method: 'POST',
+          headers: _headers,
+          extra: _extra,
+        )
+            .compose(
+              _dio.options,
+              '/',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+              baseUrl: _combineBaseUrls(
+                _dio.options.baseUrl,
+                baseUrl,
+              ),
+            ),
+      ),
+    );
     final value = OrderModel.fromJson(_result.data!);
     return value;
   }
