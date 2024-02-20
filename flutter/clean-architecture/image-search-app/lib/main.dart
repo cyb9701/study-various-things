@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:image_search_app/data/api.dart';
 import 'package:image_search_app/data/photo_provider.dart';
+import 'package:image_search_app/data/pixabay_api.dart';
 import 'package:image_search_app/ui/home_screen.dart';
 import 'package:image_search_app/ui/home_view_model.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: PhotoProvider(
         homeViewModel: HomeViewModel(
-          pixabayApi: PixabayApi(),
+          repository: PixabayApi(),
         ),
         child: const HomeScreen(),
       ),
