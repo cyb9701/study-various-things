@@ -11,8 +11,8 @@ class Photo {
     required this.webformatWidth,
     required this.webformatHeight,
     required this.largeImageURL,
-    required this.fullHDURL,
-    required this.imageURL,
+    this.fullHDURL,
+    this.imageURL,
     required this.imageWidth,
     required this.imageHeight,
     required this.imageSize,
@@ -36,8 +36,8 @@ class Photo {
   late final int webformatWidth;
   late final int webformatHeight;
   late final String largeImageURL;
-  late final String fullHDURL;
-  late final String imageURL;
+  late final String? fullHDURL;
+  late final String? imageURL;
   late final int imageWidth;
   late final int imageHeight;
   late final int imageSize;

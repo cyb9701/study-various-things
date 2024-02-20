@@ -1,7 +1,39 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class HomeScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:image_search_app/ui/widget/photo_widget.dart';
+
+import '../model/photo.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _textEditingController = TextEditingController();
+
+  List<Photo> _photos = [];
+
+  Future<List<Photo>> fetch(String query) async {
+    final response = await http.get(
+      Uri.parse(
+          'https://pixabay.com/api?key=42449085-69bca0423db80e38b67e1c232&q=$query&image_type=photo'),
+    );
+
+    final jsonResponse = jsonDecode(response.body);
+    Iterable hits = jsonResponse['hits'];
+    return hits.map((e) => Photo.fromJson(e)).toList();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +54,18 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
+              controller: _textEditingController,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 suffixIcon: IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final photos = await fetch(_textEditingController.text);
+                    setState(() {
+                      _photos = photos;
+                    });
+                  },
                   icon: const Icon(
                     Icons.search,
                   ),
@@ -43,16 +81,10 @@ class HomeScreen extends StatelessWidget {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
-              itemCount: 10,
+              itemCount: _photos.length,
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    image: DecorationImage(
-                      image: NetworkImage(''),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                return PhotoWidget(
+                  photo: _photos[index],
                 );
               },
             ),
