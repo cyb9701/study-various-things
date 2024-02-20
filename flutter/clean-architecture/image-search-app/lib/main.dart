@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_search_app/data/api.dart';
+import 'package:image_search_app/data/photo_provider.dart';
 import 'package:image_search_app/ui/home_screen.dart';
 
 void main() {
@@ -10,9 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: PhotoProvider(
+        pixabayApi: PixabayApi(),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
