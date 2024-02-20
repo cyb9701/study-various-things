@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 suffixIcon: IconButton(
                   onPressed: () async {
-                    photoProvider.fetch(_textEditingController.text);
+                    photoProvider.homeViewModel.fetch(_textEditingController.text);
                   },
                   icon: const Icon(
                     Icons.search,
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           StreamBuilder(
-            stream: photoProvider.photoStream,
+            stream: photoProvider.homeViewModel.photoStream,
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const CircularProgressIndicator();
