@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../model/photo.dart';
+import '../../../domain_layer/model/photo.dart';
 
 class PhotoWidget extends StatelessWidget {
   final Photo photo;

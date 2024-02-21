@@ -3,8 +3,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
-import '../data/photo_api_repository.dart';
-import '../model/photo.dart';
+import '../../domain_layer/repository/photo_api_repository.dart';
+import '../../domain_layer/model/photo.dart';
 
 class HomeViewModel with ChangeNotifier {
   final PhotoApiRepository repository;
