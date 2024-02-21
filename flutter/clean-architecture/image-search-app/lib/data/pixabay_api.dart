@@ -10,8 +10,10 @@ class PixabayApi implements PhotoApiRepository {
   static const key = '42449085-69bca0423db80e38b67e1c232';
 
   @override
-  Future<List<Photo>> fetch(String query) async {
-    final response = await http.get(
+  Future<List<Photo>> fetch(String query, {http.Client? client}) async {
+    client ??= http.Client();
+
+    final response = await client.get(
       Uri.parse('$baseUrl?key=$key&q=$query&image_type=photo'),
     );
 
