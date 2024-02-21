@@ -21,8 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<HomeViewModel>();
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -46,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 suffixIcon: IconButton(
-                  onPressed: () async {
-                    provider.fetch(_textEditingController.text);
+                  onPressed: () {
+                    context.read<HomeViewModel>().fetch(_textEditingController.text);
                   },
                   icon: const Icon(
                     Icons.search,
@@ -56,30 +54,24 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          StreamBuilder(
-            stream: provider.photoStream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const CircularProgressIndicator();
-              } else {
-                final photo = snapshot.data!;
-                return Expanded(
-                  child: GridView.builder(
-                    padding: const EdgeInsets.all(16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                    ),
-                    itemCount: photo.length,
-                    itemBuilder: (context, index) {
-                      return PhotoWidget(
-                        photo: photo[index],
-                      );
-                    },
+          Consumer<HomeViewModel>(
+            builder: (_, viewModel, child) {
+              return Expanded(
+                child: GridView.builder(
+                  padding: const EdgeInsets.all(16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
                   ),
-                );
-              }
+                  itemCount: viewModel.photos.length,
+                  itemBuilder: (context, index) {
+                    return PhotoWidget(
+                      photo: viewModel.photos[index],
+                    );
+                  },
+                ),
+              );
             },
           ),
         ],

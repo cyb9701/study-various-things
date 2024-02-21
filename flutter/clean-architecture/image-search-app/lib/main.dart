@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Provider(
+      home: ChangeNotifierProvider(
         create: (_) => HomeViewModel(repository: PixabayApi()),
         child: const HomeScreen(),
       ),
