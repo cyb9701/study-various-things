@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:image_search_app/data_layer/data_sorce/result.dart';
 import 'package:image_search_app/domain_layer/repository/photo_api_repository.dart';
 
 import '../../domain_layer/model/photo.dart';
@@ -11,11 +12,16 @@ class PhotoApiRepositoryImpl implements PhotoApiRepository {
   PhotoApiRepositoryImpl(this.api);
 
   @override
-  Future<List<Photo>> fetch(String query) async {
-    final response = await api.fetch(query);
+  Future<Result<List<Photo>>> fetch(String query) async {
+    try {
+      final response = await api.fetch(query);
+      final json = jsonDecode(response.body);
+      Iterable hits = json['hits'];
+      final List<Photo> data = hits.map((e) => Photo.fromJson(e)).toList();
 
-    final jsonResponse = jsonDecode(response.body);
-    Iterable hits = jsonResponse['hits'];
-    return hits.map((e) => Photo.fromJson(e)).toList();
+      return Result.success(data);
+    } catch (e) {
+      return Result.error(e.toString());
+    }
   }
 }

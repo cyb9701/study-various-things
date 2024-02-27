@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:image_search_app/domain_layer/repository/photo_api_repository.dart';
+import 'package:image_search_app/data_layer/data_sorce/result.dart';
 import 'package:image_search_app/domain_layer/model/photo.dart';
+import 'package:image_search_app/domain_layer/repository/photo_api_repository.dart';
 import 'package:image_search_app/presentation_layer/home/home_view_model.dart';
 
 void main() {
@@ -20,9 +21,9 @@ void main() {
 
 class FakePhotoApiRepository extends PhotoApiRepository {
   @override
-  Future<List<Photo>> fetch(String query) async {
+  Future<Result<List<Photo>>> fetch(String query) async {
     await Future.delayed(const Duration(seconds: 1));
-    return fakeJson.map((e) => Photo.fromJson(e)).toList();
+    return Result.success(fakeJson.map((e) => Photo.fromJson(e)).toList());
   }
 }
 

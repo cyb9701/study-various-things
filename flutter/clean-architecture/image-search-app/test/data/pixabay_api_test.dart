@@ -1,7 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_search_app/data_layer/data_sorce/pixabay_api.dart';
+import 'package:image_search_app/data_layer/data_sorce/result.dart';
 import 'package:image_search_app/data_layer/repository/photo_api_repository_impl.dart';
+import 'package:image_search_app/domain_layer/model/photo.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -24,9 +26,9 @@ void main() {
       ),
     ).thenAnswer((_) async => http.Response('json', 200));
 
-    final result = await api.fetch('apple');
+    final Result<List<Photo>> result = await api.fetch('apple');
 
-    expect(result.length, 20);
+    expect((result as Success).data.length, 20);
 
     verify(
       client.get(
