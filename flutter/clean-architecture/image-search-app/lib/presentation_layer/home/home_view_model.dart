@@ -7,12 +7,12 @@ import 'package:image_search_app/presentation_layer/home/home_ui_event.dart';
 
 import '../../data_layer/data_sorce/result.dart';
 import '../../domain_layer/model/photo.dart';
-import '../../domain_layer/repository/photo_api_repository.dart';
+import '../../domain_layer/use_case/get_photos_use_case.dart';
 
 class HomeViewModel with ChangeNotifier {
-  final PhotoApiRepository repository;
+  final GetPhotosUseCase getPhotosUseCase;
 
-  HomeViewModel({required this.repository});
+  HomeViewModel({required this.getPhotosUseCase});
 
   HomeState _state = const HomeState(photos: [], isLoading: false);
 
@@ -27,7 +27,9 @@ class HomeViewModel with ChangeNotifier {
     _state = _state.copyWith(isLoading: true);
     notifyListeners();
 
-    final Result<List<Photo>> result = await repository.fetch(query);
+    final Result<List<Photo>> result = await getPhotosUseCase.execute(query);
+    // final Result<List<Photo>> result = await getPhotosUseCase.call(query);
+    // final Result<List<Photo>> result = await getPhotosUseCase(query);
 
     switch (result) {
       case Success(data: List<Photo> data):
