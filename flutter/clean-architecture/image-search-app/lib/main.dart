@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_search_app/data_layer/data_sorce/pixabay_api.dart';
-import 'package:image_search_app/data_layer/repository/photo_api_repository_impl.dart';
-import 'package:image_search_app/domain_layer/use_case/get_photos_use_case.dart';
+import 'package:image_search_app/di/provider_setup.dart';
 import 'package:image_search_app/presentation_layer/home/home_screen.dart';
-import 'package:image_search_app/presentation_layer/home/home_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const MyApp(),
+    MultiProvider(
+      providers: globalProviders,
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -18,16 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChangeNotifierProvider(
-        create: (_) => HomeViewModel(
-          getPhotosUseCase: GetPhotosUseCase(
-            repository: PhotoApiRepositoryImpl(PixabayApi(http.Client())),
-          ),
-        ),
-        child: const HomeScreen(),
-      ),
+      home: HomeScreen(),
     );
   }
 }
