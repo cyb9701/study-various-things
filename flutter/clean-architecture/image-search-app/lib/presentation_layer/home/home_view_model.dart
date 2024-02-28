@@ -29,12 +29,11 @@ class HomeViewModel with ChangeNotifier {
 
     final Result<List<Photo>> result = await repository.fetch(query);
 
-    if (result is Success) {
-      final photos = (result as Success).data;
-      _state = _state.copyWith(photos: photos);
-    } else {
-      final message = (result as Error).message;
-      _eventController.add(HomeUiEvent.showSnackBar(message));
+    switch (result) {
+      case Success(data: List<Photo> data):
+        _state = _state.copyWith(photos: data);
+      case Error(message: String message):
+        _eventController.add(HomeUiEvent.showSnackBar(message));
     }
 
     _state = _state.copyWith(isLoading: false);

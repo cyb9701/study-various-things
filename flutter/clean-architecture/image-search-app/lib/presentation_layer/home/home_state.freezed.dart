@@ -14,12 +14,8 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-HomeState _$HomeStateFromJson(
-  Map<String, dynamic> json,
-) {
-  return _HomeState.fromJson(
-    json,
-  );
+HomeState _$HomeStateFromJson(Map<String, dynamic> json) {
+  return _HomeState.fromJson(json);
 }
 
 /// @nodoc
@@ -115,12 +111,8 @@ class _$HomeStateImpl implements _HomeState {
       {required final List<Photo> photos, required this.isLoading})
       : _photos = photos;
 
-  factory _$HomeStateImpl.fromJson(
-    Map<String, dynamic> json,
-  ) =>
-      _$$HomeStateImplFromJson(
-        json,
-      );
+  factory _$HomeStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HomeStateImplFromJson(json);
 
   final List<Photo> _photos;
   @override
@@ -172,9 +164,8 @@ abstract class _HomeState implements HomeState {
       {required final List<Photo> photos,
       required final bool isLoading}) = _$HomeStateImpl;
 
-  factory _HomeState.fromJson(
-    Map<String, dynamic> json,
-  ) = _$HomeStateImpl.fromJson;
+  factory _HomeState.fromJson(Map<String, dynamic> json) =
+      _$HomeStateImpl.fromJson;
 
   @override
   List<Photo> get photos;
