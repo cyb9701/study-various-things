@@ -14,9 +14,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.4
   mockito: ^5.4.2
-  json_annotation: ^4.8.1
   equatable: ^2.0.5
   provider: ^6.1.1
+
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +27,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.4.8
   json_serializable: ^6.7.1
+  freezed: ^2.4.7
 
 flutter:
   uses-material-design: true

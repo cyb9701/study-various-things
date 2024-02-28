@@ -79,6 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Consumer<HomeViewModel>(
             builder: (_, viewModel, child) {
+              if (viewModel.state.isLoading) {
+                return const CircularProgressIndicator();
+              }
               return Expanded(
                 child: GridView.builder(
                   padding: const EdgeInsets.all(16),

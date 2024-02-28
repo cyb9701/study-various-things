@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:image_search_app/presentation_layer/home/home_state.dart';
 import 'package:image_search_app/presentation_layer/home/home_ui_event.dart';
 
 import '../../data_layer/data_sorce/result.dart';
@@ -13,24 +14,30 @@ class HomeViewModel with ChangeNotifier {
 
   HomeViewModel({required this.repository});
 
-  List<Photo> _photos = [];
+  HomeState _state = const HomeState(photos: [], isLoading: false);
 
-  UnmodifiableListView<Photo> get photos => UnmodifiableListView(_photos);
+  HomeState get state => _state;
+
+  UnmodifiableListView<Photo> get photos => UnmodifiableListView(_state.photos);
 
   final _eventController = StreamController<HomeUiEvent>();
   Stream<HomeUiEvent> get eventStream => _eventController.stream;
 
   Future<void> fetch(String query) async {
+    _state = _state.copyWith(isLoading: true);
+    notifyListeners();
+
     final Result<List<Photo>> result = await repository.fetch(query);
 
     if (result is Success) {
       final photos = (result as Success).data;
-      _photos = photos;
+      _state = _state.copyWith(photos: photos);
     } else {
       final message = (result as Error).message;
       _eventController.add(HomeUiEvent.showSnackBar(message));
     }
 
+    _state = _state.copyWith(isLoading: false);
     notifyListeners();
   }
 }
