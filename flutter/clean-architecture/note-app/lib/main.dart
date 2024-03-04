@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/presentation_layer/notes/notes_screen.dart';
+import 'package:note_app/ui/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,9 +11,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      theme: ThemeData(
+        colorScheme: colorScheme(context),
+        canvasColor: darkGray,
+        floatingActionButtonTheme: floatingActionButtonTheme(context),
+        appBarTheme: appBarTheme(context),
+      ),
+      home: const NotesScreen(),
     );
+  }
+
+  ColorScheme colorScheme(BuildContext context) {
+    return Theme.of(context).colorScheme.copyWith(
+          background: darkGray,
+        );
+  }
+
+  FloatingActionButtonThemeData floatingActionButtonTheme(BuildContext context) {
+    return Theme.of(context).floatingActionButtonTheme.copyWith(
+          backgroundColor: ligtblue,
+          foregroundColor: darkGray,
+        );
+  }
+
+  AppBarTheme appBarTheme(BuildContext context) {
+    return Theme.of(context).appBarTheme.copyWith(
+          backgroundColor: darkGray,
+          elevation: 0,
+        );
   }
 }
