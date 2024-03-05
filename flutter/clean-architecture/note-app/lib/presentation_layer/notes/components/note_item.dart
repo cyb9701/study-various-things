@@ -4,10 +4,12 @@ import '../../../domain_layer/model/note.dart';
 
 class NoteItem extends StatelessWidget {
   final Note note;
+  final void Function()? onDeleteTap;
 
   const NoteItem({
     super.key,
     required this.note,
+    this.onDeleteTap,
   });
 
   @override
@@ -29,9 +31,21 @@ class NoteItem extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 12),
-            child: Text(
-              note.content,
-              style: Theme.of(context).textTheme.bodyMedium,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  note.content,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                GestureDetector(
+                  onTap: () => onDeleteTap?.call(),
+                  child: const Icon(
+                    Icons.delete_rounded,
+                    size: 20,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
