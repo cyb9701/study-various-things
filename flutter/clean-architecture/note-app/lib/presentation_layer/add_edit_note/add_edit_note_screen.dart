@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/ui/colors.dart';
 
+part 'components/colors.dart';
+
 class AddEditNoteScreen extends StatefulWidget {
   const AddEditNoteScreen({super.key});
 
@@ -31,41 +33,13 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: colors.map((color) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _color = color;
-                        });
-                      },
-                      child: Container(
-                        width: 45,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: color,
-                          boxShadow: [
-                            BoxShadow(
-                              color: darkGray.withOpacity(0.2),
-                              blurRadius: 6.0,
-                              spreadRadius: 1.0,
-                            )
-                          ],
-                          shape: BoxShape.circle,
-                          border: _color != color
-                              ? null
-                              : Border.all(
-                                  color: darkGray,
-                                  width: 2,
-                                ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
+              _Colors(
+                color: _color,
+                setColor: (color) {
+                  setState(() {
+                    _color = color;
+                  });
+                },
               ),
               TextField(
                 controller: _titleController,
