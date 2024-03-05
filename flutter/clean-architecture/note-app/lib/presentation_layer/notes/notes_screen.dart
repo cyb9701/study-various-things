@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/domain_layer/model/note.dart';
+import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_screen.dart';
 
 import 'components/note_item.dart';
 
@@ -10,9 +11,7 @@ class NotesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-      ),
+      floatingActionButton: floatingActionButton(context),
       body: ListView.separated(
         padding: const EdgeInsets.all(8),
         itemCount: 2,
@@ -58,6 +57,22 @@ class NotesScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  FloatingActionButton floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AddEditNoteScreen(),
+          ),
+        );
+      },
+      child: const Icon(
+        Icons.add_rounded,
+      ),
     );
   }
 }

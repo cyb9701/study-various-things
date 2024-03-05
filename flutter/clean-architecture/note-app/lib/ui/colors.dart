@@ -6,5 +6,13 @@ const wisteria = Color(0xffcf94da);
 const skyblue = Color(0xff81deea);
 const illusion = Color(0xfff48fb1);
 
+const List<Color> colors = [
+  roseBud,
+  primrose,
+  wisteria,
+  skyblue,
+  illusion,
+];
+
 const darkGray = Color(0xff202020);
 const ligtblue = Color(0xffd7e8de);
