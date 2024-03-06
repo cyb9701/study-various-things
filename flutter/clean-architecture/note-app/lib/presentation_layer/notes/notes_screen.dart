@@ -21,7 +21,26 @@ class NotesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         itemCount: state.notes.length,
         itemBuilder: (context, index) {
-          return NoteItem(note: state.notes[index]);
+          final note = state.notes[index];
+          return NoteItem(
+            note: note,
+            onDeleteTap: () {
+              viewModel.onEvent(NotesEvent.deleteNote(note));
+
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Delete'),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      viewModel.onEvent(NotesEvent.undoNote(note));
+                    },
+                  ),
+                ),
+              );
+            },
+          );
         },
         separatorBuilder: (context, index) => const SizedBox(height: 8),
       ),
