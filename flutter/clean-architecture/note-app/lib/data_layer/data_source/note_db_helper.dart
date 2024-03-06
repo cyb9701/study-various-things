@@ -2,10 +2,10 @@ import 'package:sqflite/sqlite_api.dart';
 
 import '../../domain_layer/model/note.dart';
 
-class NoteDb {
+class NoteDbHelper {
   final Database database;
 
-  NoteDb({
+  NoteDbHelper({
     required this.database,
   });
 
