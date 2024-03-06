@@ -30,7 +30,7 @@ class NoteItem extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 12),
+            padding: const EdgeInsets.only(top: 4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

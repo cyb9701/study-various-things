@@ -10,7 +10,9 @@ class NotesViewModel with ChangeNotifier {
 
   NotesViewModel({
     required this.repository,
-  });
+  }) {
+    _loadNotes();
+  }
 
   NotesState _state = NotesState();
   NotesState get state => _state;

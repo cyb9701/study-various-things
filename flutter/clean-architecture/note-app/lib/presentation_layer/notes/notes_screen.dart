@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/domain_layer/model/note.dart';
 import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_screen.dart';
+import 'package:note_app/presentation_layer/notes/notes_event.dart';
+import 'package:note_app/presentation_layer/notes/notes_view_model.dart';
+import 'package:provider/provider.dart';
 
 import 'components/note_item.dart';
 
@@ -9,31 +11,17 @@ class NotesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<NotesViewModel>();
+    final state = viewModel.state;
+
     return Scaffold(
       appBar: appBar(),
-      floatingActionButton: floatingActionButton(context),
+      floatingActionButton: floatingActionButton(context, viewModel),
       body: ListView.separated(
         padding: const EdgeInsets.all(8),
-        itemCount: 2,
+        itemCount: state.notes.length,
         itemBuilder: (context, index) {
-          return [
-            NoteItem(
-              note: Note(
-                title: 'title',
-                content: 'content',
-                color: Colors.yellow.value,
-                timestamp: DateTime.now().millisecondsSinceEpoch,
-              ),
-            ),
-            NoteItem(
-              note: Note(
-                title: 'title',
-                content: 'content',
-                color: Colors.blueAccent.value,
-                timestamp: DateTime.now().millisecondsSinceEpoch,
-              ),
-            ),
-          ][index];
+          return NoteItem(note: state.notes[index]);
         },
         separatorBuilder: (context, index) => const SizedBox(height: 8),
       ),
@@ -47,6 +35,7 @@ class NotesScreen extends StatelessWidget {
         'Note',
         style: TextStyle(
           fontSize: 24,
+          color: Colors.white,
         ),
       ),
       actions: [
@@ -54,21 +43,29 @@ class NotesScreen extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(
             Icons.sort_rounded,
+            color: Colors.white,
           ),
         ),
       ],
     );
   }
 
-  FloatingActionButton floatingActionButton(BuildContext context) {
+  FloatingActionButton floatingActionButton(
+    BuildContext context,
+    NotesViewModel viewModel,
+  ) {
     return FloatingActionButton(
-      onPressed: () {
-        Navigator.push(
+      onPressed: () async {
+        final result = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const AddEditNoteScreen(),
           ),
         );
+
+        if (result ?? false) {
+          viewModel.onEvent(const NotesEvent.loadNotes());
+        }
       },
       child: const Icon(
         Icons.add_rounded,
