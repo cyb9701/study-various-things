@@ -31,7 +31,7 @@ class NotesViewModel with ChangeNotifier {
   }
 
   Future<void> _loadNotes() async {
-    List<Note> notes = await useCases.getNotesUseCase();
+    List<Note> notes = await useCases.getNotesUseCase(_state.noteOrder);
     _state = _state.copyWith(
       notes: notes,
     );
