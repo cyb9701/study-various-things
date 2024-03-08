@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:note_app/domain_layer/model/note.dart';
 import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_event.dart';
+import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_ui_event.dart';
 import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_view_model.dart';
 import 'package:note_app/ui/colors.dart';
 import 'package:provider/provider.dart';
@@ -27,12 +28,25 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
 
   @override
   void initState() {
+    final note = widget.note;
+    if (note != null) {
+      _titleController.text = note.title;
+      _contentController.text = note.content;
+    }
+
     Future.microtask(() {
       final viewModel = context.read<AddEditNoteViewModel>();
       _streamSubscription = viewModel.eventStream.listen((event) {
-        event.when(savedNote: () {
-          Navigator.pop(context, true);
-        });
+        switch (event) {
+          case SavedNote():
+            Navigator.pop(context, true);
+          case ShowSnackBar(message: String m):
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(m),
+              ),
+            );
+        }
       });
     });
     super.initState();
@@ -130,14 +144,6 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   FloatingActionButton floatingActionButton(AddEditNoteViewModel viewModel) {
     return FloatingActionButton(
       onPressed: () {
-        if (_titleController.text.isEmpty || _contentController.text.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Empty'),
-            ),
-          );
-        }
-
         viewModel.onEvent(
           AddEditNoteEvent.saveNote(
             widget.note?.id,

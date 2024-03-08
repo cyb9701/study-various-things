@@ -15,8 +15,8 @@ class AddEditNoteViewModel with ChangeNotifier {
   int _color = roseBud.value;
   int get color => _color;
 
-  final _eventStream = StreamController<AddEditNoteUiEvent>.broadcast();
-  Stream<AddEditNoteUiEvent> get eventStream => _eventStream.stream;
+  final _uiEventController = StreamController<AddEditNoteUiEvent>.broadcast();
+  Stream<AddEditNoteUiEvent> get eventStream => _uiEventController.stream;
 
   void onEvent(AddEditNoteEvent event) {
     switch (event) {
@@ -33,6 +33,15 @@ class AddEditNoteViewModel with ChangeNotifier {
   }
 
   Future<void> _saveNote(int? id, String title, String content) async {
+    if (title.isEmpty || content.isEmpty) {
+      _uiEventController.add(
+        const AddEditNoteUiEvent.showSnackBar(
+          'Empty!!!!',
+        ),
+      );
+      return;
+    }
+
     final note = Note(
       id: id,
       title: title,
@@ -47,6 +56,6 @@ class AddEditNoteViewModel with ChangeNotifier {
       await repository.updateNote(note);
     }
 
-    _eventStream.add(const AddEditNoteUiEvent.savedNote());
+    _uiEventController.add(const AddEditNoteUiEvent.savedNote());
   }
 }

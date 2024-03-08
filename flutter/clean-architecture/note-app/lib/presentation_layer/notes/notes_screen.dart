@@ -24,6 +24,20 @@ class NotesScreen extends StatelessWidget {
           final note = state.notes[index];
           return NoteItem(
             note: note,
+            onEditTap: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddEditNoteScreen(
+                    note: note,
+                  ),
+                ),
+              );
+
+              if (result ?? false) {
+                viewModel.onEvent(const NotesEvent.loadNotes());
+              }
+            },
             onDeleteTap: () {
               viewModel.onEvent(NotesEvent.deleteNote(note));
 
