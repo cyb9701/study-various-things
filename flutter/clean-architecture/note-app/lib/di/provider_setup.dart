@@ -5,6 +5,7 @@ import 'package:note_app/domain_layer/use_case/add_note_use_case.dart';
 import 'package:note_app/domain_layer/use_case/delete_note_use_case.dart';
 import 'package:note_app/domain_layer/use_case/get_note_use_case.dart';
 import 'package:note_app/domain_layer/use_case/get_notes_use_case.dart';
+import 'package:note_app/domain_layer/use_case/order_note_use_case.dart';
 import 'package:note_app/domain_layer/use_case/update_note_use_case.dart';
 import 'package:note_app/domain_layer/use_case/use_cases.dart';
 import 'package:note_app/presentation_layer/add_edit_note/add_edit_note_view_model.dart';
@@ -30,7 +31,10 @@ Future<List<SingleChildWidget>> getProviders() async {
     addNoteUseCase: AddNoteUseCase(repository: repository),
     deleteNoteUseCase: DeleteNoteUseCase(repository: repository),
     getNoteUseCase: GetNoteUseCase(repository: repository),
-    getNotesUseCase: GetNotesUseCase(repository: repository),
+    getNotesUseCase: GetNotesUseCase(
+      repository: repository,
+      orderNoteUseCase: OrderNoteUseCase(),
+    ),
     updateNoteUseCase: UpdateNoteUseCase(repository: repository),
   );
   NotesViewModel notesViewModel = NotesViewModel(useCases: useCases);

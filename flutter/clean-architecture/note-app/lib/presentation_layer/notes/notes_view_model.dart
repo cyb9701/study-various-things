@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/domain_layer/use_case/use_cases.dart';
+import 'package:note_app/domain_layer/util/note_order.dart';
 import 'package:note_app/presentation_layer/notes/notes_state.dart';
 
 import '../../domain_layer/model/note.dart';
@@ -27,6 +28,8 @@ class NotesViewModel with ChangeNotifier {
         _deleteNote(note);
       case UndoNote(note: Note note):
         _undoNote(note);
+      case ChangeOrder(noteOrder: NoteOrder noteOrder):
+        _changeOrder(noteOrder);
     }
   }
 
@@ -50,5 +53,13 @@ class NotesViewModel with ChangeNotifier {
       _recentlyDeletedNote = null;
       await _loadNotes();
     }
+  }
+
+  void _changeOrder(NoteOrder noteOrder) {
+    _state = _state.copyWith(
+      notes: useCases.getNotesUseCase.orderNoteUseCase(_state.notes, noteOrder),
+      noteOrder: noteOrder,
+    );
+    notifyListeners();
   }
 }

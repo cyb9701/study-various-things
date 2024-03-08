@@ -21,6 +21,7 @@ mixin _$NotesEvent {
     required TResult Function() loadNotes,
     required TResult Function(Note note) deleteNote,
     required TResult Function(Note note) undoNote,
+    required TResult Function(NoteOrder noteOrder) changeOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$NotesEvent {
     TResult? Function()? loadNotes,
     TResult? Function(Note note)? deleteNote,
     TResult? Function(Note note)? undoNote,
+    TResult? Function(NoteOrder noteOrder)? changeOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$NotesEvent {
     TResult Function()? loadNotes,
     TResult Function(Note note)? deleteNote,
     TResult Function(Note note)? undoNote,
+    TResult Function(NoteOrder noteOrder)? changeOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$NotesEvent {
     required TResult Function(LoadNotes value) loadNotes,
     required TResult Function(DeleteNote value) deleteNote,
     required TResult Function(UndoNote value) undoNote,
+    required TResult Function(ChangeOrder value) changeOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$NotesEvent {
     TResult? Function(LoadNotes value)? loadNotes,
     TResult? Function(DeleteNote value)? deleteNote,
     TResult? Function(UndoNote value)? undoNote,
+    TResult? Function(ChangeOrder value)? changeOrder,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$NotesEvent {
     TResult Function(LoadNotes value)? loadNotes,
     TResult Function(DeleteNote value)? deleteNote,
     TResult Function(UndoNote value)? undoNote,
+    TResult Function(ChangeOrder value)? changeOrder,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,6 +127,7 @@ class _$LoadNotesImpl implements LoadNotes {
     required TResult Function() loadNotes,
     required TResult Function(Note note) deleteNote,
     required TResult Function(Note note) undoNote,
+    required TResult Function(NoteOrder noteOrder) changeOrder,
   }) {
     return loadNotes();
   }
@@ -131,6 +138,7 @@ class _$LoadNotesImpl implements LoadNotes {
     TResult? Function()? loadNotes,
     TResult? Function(Note note)? deleteNote,
     TResult? Function(Note note)? undoNote,
+    TResult? Function(NoteOrder noteOrder)? changeOrder,
   }) {
     return loadNotes?.call();
   }
@@ -141,6 +149,7 @@ class _$LoadNotesImpl implements LoadNotes {
     TResult Function()? loadNotes,
     TResult Function(Note note)? deleteNote,
     TResult Function(Note note)? undoNote,
+    TResult Function(NoteOrder noteOrder)? changeOrder,
     required TResult orElse(),
   }) {
     if (loadNotes != null) {
@@ -155,6 +164,7 @@ class _$LoadNotesImpl implements LoadNotes {
     required TResult Function(LoadNotes value) loadNotes,
     required TResult Function(DeleteNote value) deleteNote,
     required TResult Function(UndoNote value) undoNote,
+    required TResult Function(ChangeOrder value) changeOrder,
   }) {
     return loadNotes(this);
   }
@@ -165,6 +175,7 @@ class _$LoadNotesImpl implements LoadNotes {
     TResult? Function(LoadNotes value)? loadNotes,
     TResult? Function(DeleteNote value)? deleteNote,
     TResult? Function(UndoNote value)? undoNote,
+    TResult? Function(ChangeOrder value)? changeOrder,
   }) {
     return loadNotes?.call(this);
   }
@@ -175,6 +186,7 @@ class _$LoadNotesImpl implements LoadNotes {
     TResult Function(LoadNotes value)? loadNotes,
     TResult Function(DeleteNote value)? deleteNote,
     TResult Function(UndoNote value)? undoNote,
+    TResult Function(ChangeOrder value)? changeOrder,
     required TResult orElse(),
   }) {
     if (loadNotes != null) {
@@ -265,6 +277,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     required TResult Function() loadNotes,
     required TResult Function(Note note) deleteNote,
     required TResult Function(Note note) undoNote,
+    required TResult Function(NoteOrder noteOrder) changeOrder,
   }) {
     return deleteNote(note);
   }
@@ -275,6 +288,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     TResult? Function()? loadNotes,
     TResult? Function(Note note)? deleteNote,
     TResult? Function(Note note)? undoNote,
+    TResult? Function(NoteOrder noteOrder)? changeOrder,
   }) {
     return deleteNote?.call(note);
   }
@@ -285,6 +299,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     TResult Function()? loadNotes,
     TResult Function(Note note)? deleteNote,
     TResult Function(Note note)? undoNote,
+    TResult Function(NoteOrder noteOrder)? changeOrder,
     required TResult orElse(),
   }) {
     if (deleteNote != null) {
@@ -299,6 +314,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     required TResult Function(LoadNotes value) loadNotes,
     required TResult Function(DeleteNote value) deleteNote,
     required TResult Function(UndoNote value) undoNote,
+    required TResult Function(ChangeOrder value) changeOrder,
   }) {
     return deleteNote(this);
   }
@@ -309,6 +325,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     TResult? Function(LoadNotes value)? loadNotes,
     TResult? Function(DeleteNote value)? deleteNote,
     TResult? Function(UndoNote value)? undoNote,
+    TResult? Function(ChangeOrder value)? changeOrder,
   }) {
     return deleteNote?.call(this);
   }
@@ -319,6 +336,7 @@ class _$DeleteNoteImpl implements DeleteNote {
     TResult Function(LoadNotes value)? loadNotes,
     TResult Function(DeleteNote value)? deleteNote,
     TResult Function(UndoNote value)? undoNote,
+    TResult Function(ChangeOrder value)? changeOrder,
     required TResult orElse(),
   }) {
     if (deleteNote != null) {
@@ -414,6 +432,7 @@ class _$UndoNoteImpl implements UndoNote {
     required TResult Function() loadNotes,
     required TResult Function(Note note) deleteNote,
     required TResult Function(Note note) undoNote,
+    required TResult Function(NoteOrder noteOrder) changeOrder,
   }) {
     return undoNote(note);
   }
@@ -424,6 +443,7 @@ class _$UndoNoteImpl implements UndoNote {
     TResult? Function()? loadNotes,
     TResult? Function(Note note)? deleteNote,
     TResult? Function(Note note)? undoNote,
+    TResult? Function(NoteOrder noteOrder)? changeOrder,
   }) {
     return undoNote?.call(note);
   }
@@ -434,6 +454,7 @@ class _$UndoNoteImpl implements UndoNote {
     TResult Function()? loadNotes,
     TResult Function(Note note)? deleteNote,
     TResult Function(Note note)? undoNote,
+    TResult Function(NoteOrder noteOrder)? changeOrder,
     required TResult orElse(),
   }) {
     if (undoNote != null) {
@@ -448,6 +469,7 @@ class _$UndoNoteImpl implements UndoNote {
     required TResult Function(LoadNotes value) loadNotes,
     required TResult Function(DeleteNote value) deleteNote,
     required TResult Function(UndoNote value) undoNote,
+    required TResult Function(ChangeOrder value) changeOrder,
   }) {
     return undoNote(this);
   }
@@ -458,6 +480,7 @@ class _$UndoNoteImpl implements UndoNote {
     TResult? Function(LoadNotes value)? loadNotes,
     TResult? Function(DeleteNote value)? deleteNote,
     TResult? Function(UndoNote value)? undoNote,
+    TResult? Function(ChangeOrder value)? changeOrder,
   }) {
     return undoNote?.call(this);
   }
@@ -468,6 +491,7 @@ class _$UndoNoteImpl implements UndoNote {
     TResult Function(LoadNotes value)? loadNotes,
     TResult Function(DeleteNote value)? deleteNote,
     TResult Function(UndoNote value)? undoNote,
+    TResult Function(ChangeOrder value)? changeOrder,
     required TResult orElse(),
   }) {
     if (undoNote != null) {
@@ -483,5 +507,161 @@ abstract class UndoNote implements NotesEvent {
   Note get note;
   @JsonKey(ignore: true)
   _$$UndoNoteImplCopyWith<_$UndoNoteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeOrderImplCopyWith<$Res> {
+  factory _$$ChangeOrderImplCopyWith(
+          _$ChangeOrderImpl value, $Res Function(_$ChangeOrderImpl) then) =
+      __$$ChangeOrderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({NoteOrder noteOrder});
+
+  $NoteOrderCopyWith<$Res> get noteOrder;
+}
+
+/// @nodoc
+class __$$ChangeOrderImplCopyWithImpl<$Res>
+    extends _$NotesEventCopyWithImpl<$Res, _$ChangeOrderImpl>
+    implements _$$ChangeOrderImplCopyWith<$Res> {
+  __$$ChangeOrderImplCopyWithImpl(
+      _$ChangeOrderImpl _value, $Res Function(_$ChangeOrderImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? noteOrder = null,
+  }) {
+    return _then(_$ChangeOrderImpl(
+      null == noteOrder
+          ? _value.noteOrder
+          : noteOrder // ignore: cast_nullable_to_non_nullable
+              as NoteOrder,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteOrderCopyWith<$Res> get noteOrder {
+    return $NoteOrderCopyWith<$Res>(_value.noteOrder, (value) {
+      return _then(_value.copyWith(noteOrder: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ChangeOrderImpl implements ChangeOrder {
+  const _$ChangeOrderImpl(this.noteOrder);
+
+  @override
+  final NoteOrder noteOrder;
+
+  @override
+  String toString() {
+    return 'NotesEvent.changeOrder(noteOrder: $noteOrder)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeOrderImpl &&
+            (identical(other.noteOrder, noteOrder) ||
+                other.noteOrder == noteOrder));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, noteOrder);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeOrderImplCopyWith<_$ChangeOrderImpl> get copyWith =>
+      __$$ChangeOrderImplCopyWithImpl<_$ChangeOrderImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadNotes,
+    required TResult Function(Note note) deleteNote,
+    required TResult Function(Note note) undoNote,
+    required TResult Function(NoteOrder noteOrder) changeOrder,
+  }) {
+    return changeOrder(noteOrder);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadNotes,
+    TResult? Function(Note note)? deleteNote,
+    TResult? Function(Note note)? undoNote,
+    TResult? Function(NoteOrder noteOrder)? changeOrder,
+  }) {
+    return changeOrder?.call(noteOrder);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadNotes,
+    TResult Function(Note note)? deleteNote,
+    TResult Function(Note note)? undoNote,
+    TResult Function(NoteOrder noteOrder)? changeOrder,
+    required TResult orElse(),
+  }) {
+    if (changeOrder != null) {
+      return changeOrder(noteOrder);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadNotes value) loadNotes,
+    required TResult Function(DeleteNote value) deleteNote,
+    required TResult Function(UndoNote value) undoNote,
+    required TResult Function(ChangeOrder value) changeOrder,
+  }) {
+    return changeOrder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadNotes value)? loadNotes,
+    TResult? Function(DeleteNote value)? deleteNote,
+    TResult? Function(UndoNote value)? undoNote,
+    TResult? Function(ChangeOrder value)? changeOrder,
+  }) {
+    return changeOrder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadNotes value)? loadNotes,
+    TResult Function(DeleteNote value)? deleteNote,
+    TResult Function(UndoNote value)? undoNote,
+    TResult Function(ChangeOrder value)? changeOrder,
+    required TResult orElse(),
+  }) {
+    if (changeOrder != null) {
+      return changeOrder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeOrder implements NotesEvent {
+  const factory ChangeOrder(final NoteOrder noteOrder) = _$ChangeOrderImpl;
+
+  NoteOrder get noteOrder;
+  @JsonKey(ignore: true)
+  _$$ChangeOrderImplCopyWith<_$ChangeOrderImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
