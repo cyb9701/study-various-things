@@ -15,7 +15,7 @@ class NotesViewModel with ChangeNotifier {
     _loadNotes();
   }
 
-  NotesState _state = NotesState();
+  NotesState _state = NotesState(isOrderSectionVisible: false);
   NotesState get state => _state;
 
   Note? _recentlyDeletedNote;
@@ -59,6 +59,13 @@ class NotesViewModel with ChangeNotifier {
     _state = _state.copyWith(
       notes: useCases.getNotesUseCase.orderNoteUseCase(_state.notes, noteOrder),
       noteOrder: noteOrder,
+    );
+    notifyListeners();
+  }
+
+  void changeOrderSectionVisible() {
+    _state = _state.copyWith(
+      isOrderSectionVisible: !_state.isOrderSectionVisible,
     );
     notifyListeners();
   }

@@ -28,9 +28,16 @@ class MyApp extends StatelessWidget {
         canvasColor: darkGray,
         floatingActionButtonTheme: floatingActionButtonTheme(context),
         appBarTheme: appBarTheme(context),
+        radioTheme: radioTheme(context),
       ),
       home: const NotesScreen(),
     );
+  }
+
+  RadioThemeData radioTheme(BuildContext context) {
+    return Theme.of(context).radioTheme.copyWith(
+          fillColor: MaterialStateProperty.resolveWith((states) => Colors.white),
+        );
   }
 
   ColorScheme colorScheme(BuildContext context) {

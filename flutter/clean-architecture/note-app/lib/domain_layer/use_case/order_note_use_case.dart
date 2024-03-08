@@ -7,7 +7,8 @@ class OrderNoteUseCase {
   OrderNoteUseCase();
 
   List<Note> call(List<Note> notes, NoteOrder noteOrder) {
-    final originNotes = notes;
+    final List<Note> originNotes = List.from(notes);
+
     switch (noteOrder) {
       case NoteOrderTitle(orderType: OrderType type):
         switch (type) {
