@@ -20,10 +20,10 @@ class AddEditNoteViewModel with ChangeNotifier {
 
   void onEvent(AddEditNoteEvent event) {
     switch (event) {
-      case ChangeColor(color: int color):
-        _changeColor(color);
-      case SaveNote(id: int? id, title: String title, content: String content):
-        _saveNote(id, title, content);
+      case ChangeColor():
+        _changeColor(event.color);
+      case SaveNote():
+        _saveNote(event.id, event.title, event.content);
     }
   }
 
