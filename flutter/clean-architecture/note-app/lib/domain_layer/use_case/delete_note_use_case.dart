@@ -1,10 +1,10 @@
 import '../model/note.dart';
 import '../repository/note_repository.dart';
 
-class DeleteNote {
+class DeleteNoteUseCase {
   NoteRepository repository;
 
-  DeleteNote({
+  DeleteNoteUseCase({
     required this.repository,
   });
 

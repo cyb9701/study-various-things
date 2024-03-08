@@ -1,14 +1,14 @@
 import '../model/note.dart';
 import '../repository/note_repository.dart';
 
-class UpdateNote {
+class AddNoteUseCase {
   NoteRepository repository;
 
-  UpdateNote({
+  AddNoteUseCase({
     required this.repository,
   });
 
   Future<void> call(Note note) async {
-    await repository.updateNote(note);
+    await repository.insertNote(note);
   }
 }
