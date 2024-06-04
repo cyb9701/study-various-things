@@ -10,15 +10,22 @@
 <div id="root"></div> <!-- 결과: <div id="root"><button>Like</button></div> -->
 <script type="text/babel">
   class GuGuDan extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        first: Math.ceil(Math.random() * 9),
-        second: Math.ceil(Math.random() * 9),
-        value: '',
-        result: '',
-      }
+    state = {
+      first: Math.ceil(Math.random() * 9),
+      second: Math.ceil(Math.random() * 9),
+      value: '',
+      result: '',
     }
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {
+    //     first: Math.ceil(Math.random() * 9),
+    //     second: Math.ceil(Math.random() * 9),
+    //     value: '',
+    //     result: '',
+    //   }
+    // }
+
 
     handleSubmit = (e) => {
       e.preventDefault();
@@ -51,16 +58,16 @@
 
     render() {
       return (
-        <div>
+        <React.Fragment>
           <div>{this.state.first} x {this.state.second} =</div>
           <form onSubmit={this.handleSubmit}>
             <label>
               <input type="number" value={this.state.value} onChange={this.handleChangeInput}/>
             </label>
-            <button>입력</button>
+            <button type="submit">입력</button>
           </form>
           <div>{this.state.result}</div>
-        </div>
+        </React.Fragment>
       );
     }
   }
