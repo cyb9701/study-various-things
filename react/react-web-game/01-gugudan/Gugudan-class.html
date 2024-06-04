@@ -1,0 +1,73 @@
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>구구단</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div> <!-- 결과: <div id="root"><button>Like</button></div> -->
+<script type="text/babel">
+  class GuGuDan extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        first: Math.ceil(Math.random() * 9),
+        second: Math.ceil(Math.random() * 9),
+        value: '',
+        result: '',
+      }
+    }
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      if (parseInt(this.state.value) === this.state.first * this.state.second) {
+        this.setState((prevState) => {
+          return {
+            first: Math.ceil(Math.random() * 9),
+            second: Math.ceil(Math.random() * 9),
+            value: '',
+            result: '정답: ' + prevState.value,
+          };
+        });
+        this.input.focus();
+      } else {
+        this.setState({
+          value: '',
+          result: '땡',
+        });
+        this.input.focus();
+      }
+    }
+
+    handleChangeInput = (e) => {
+      this.setState({
+        value: e.target.value,
+        result: '',
+      })
+    }
+
+
+    render() {
+      return (
+        <div>
+          <div>{this.state.first} x {this.state.second} =</div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input type="number" value={this.state.value} onChange={this.handleChangeInput}/>
+            </label>
+            <button>입력</button>
+          </form>
+          <div>{this.state.result}</div>
+        </div>
+      );
+    }
+  }
+
+</script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.querySelector('#root')).render(<GuGuDan/>);
+</script>
+</body>
+</html>
