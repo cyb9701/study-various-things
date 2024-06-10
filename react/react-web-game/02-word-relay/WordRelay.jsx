@@ -3,16 +3,13 @@ const ReactDom = require('react-dom');
 const {Component} = React;
 
 class WordRelay extends Component {
-  state = {};
-
   render() {
     return (
       <>
-        <button></button>
+        <h1>Hello</h1>
       </>
     );
   }
 }
-
 
 module.exports = WordRelay;
