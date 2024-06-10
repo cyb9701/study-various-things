@@ -1,0 +1,60 @@
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>구구단</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+  'use strict';
+
+  const Gugudan = () => {
+    const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+    const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+    const [value, setValue] = React.useState('');
+    const [result, setResult] = React.useState('');
+    const inputRef = React.useRef(null);
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (parseInt(value) === first * second) {
+        setFirst(Math.ceil(Math.random() * 9));
+        setSecond(Math.ceil(Math.random() * 9));
+        setValue('');
+        setResult('정답: ' + value);
+      } else {
+        setValue('');
+        setResult('땡');
+      }
+      inputRef.current.focus();
+    }
+
+    const handleChangeInput = (e) => {
+      setValue(e.target.value);
+      setResult('');
+    }
+
+    return (
+      <React.Fragment>
+        <div>{first} x {second} =</div>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <input ref={inputRef} type="number" value={value}
+                   onChange={handleChangeInput}/>
+          </label>
+          <button type="submit">입력</button>
+        </form>
+        <div>{result}</div>
+      </React.Fragment>
+    );
+  }
+
+</script>
+<script type="text/babel">
+  ReactDOM.createRoot(document.querySelector('#root')).render(<Gugudan/>);
+</script>
+</body>
+</html>
