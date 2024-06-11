@@ -6,7 +6,6 @@ const WordRelay = () => {
   const [result, setResult] = React.useState('');
   const inputRef = React.useRef(null);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
