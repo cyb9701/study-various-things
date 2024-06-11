@@ -4,6 +4,7 @@
  */
 
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   name: 'word-relay-setting',
@@ -30,10 +31,25 @@ module.exports = {
       test: /\.jsx?/,
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env', '@babel/preset-react'],
+        // presets: ['@babel/preset-env', '@babel/preset-react'],
+        presets: [
+          ['@babel/preset-env', {
+            // https://browsersl.ist/
+            // 한국에서의 점유율 5% 이상의 브라우저에서 사용.
+            targets: {
+              browsers: ['> 5% in KR'],
+            },
+          }],
+          '@babel/preset-react'
+        ],
+        plugins: [],
       },
     }],
   },
+
+  plugins: [
+    new webpack.LoaderOptionsPlugin({debug: true}),
+  ],
 
   // 출력.
   output: {
