@@ -5,6 +5,7 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
   name: 'word-relay-setting',
@@ -42,13 +43,13 @@ module.exports = {
           }],
           '@babel/preset-react'
         ],
-        plugins: [],
+        plugins: ['react-refresh/babel'],
       },
     }],
   },
 
   plugins: [
-    new webpack.LoaderOptionsPlugin({debug: true}),
+    new ReactRefreshWebpackPlugin(),
   ],
 
   // 출력.
@@ -56,4 +57,16 @@ module.exports = {
     path: path.join(__dirname, 'dist'), // __dirname: 현재 폴더 경로.
     filename: 'app.js',
   },
+
+  // 개발용 서버.
+  devServer: {
+    devMiddleware: {
+      publicPath: '/dist',
+    },
+    static: {
+      directory: path.join(__dirname),
+    },
+    hot: true,
+    port: 3000,
+  }
 }
