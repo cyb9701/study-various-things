@@ -1,10 +1,11 @@
 import React from 'react';
 
 const TryItem = (props) => {
-  const {value, index} = props;
+  const {tries} = props;
+  const {value, result} = tries;
 
   return (
-    <li key={value + index}>{value}</li>
+    <li>{`${value.split('').join(', ')} -> ${result}`}</li>
   );
 }
 
