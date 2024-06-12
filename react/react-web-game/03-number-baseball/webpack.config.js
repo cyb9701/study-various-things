@@ -45,6 +45,6 @@ module.exports = {
       directory: path.join(__dirname),
     },
     hot: true,
-    port: 3000,
+    port: 8000,
   }
 }
