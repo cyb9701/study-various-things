@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import TryItem from "./TryItem";
 
-const Try = (props) => {
+const Try = memo((props) => {
   const {tryInfo} = props;
 
   return (
@@ -14,6 +14,7 @@ const Try = (props) => {
       </ul>
     </>
   );
-}
+})
 
+Try.displayName = 'Try';
 export default Try;
