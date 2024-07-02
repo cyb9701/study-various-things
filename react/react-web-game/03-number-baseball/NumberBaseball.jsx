@@ -19,7 +19,7 @@ const NumberBaseball = () => {
   const [result, setResult] = React.useState('');
   const [inputValue, setInputValue] = React.useState('');
   const [tries, setTries] = React.useState([]);
-  const [answer, setAnswer] = React.useState(getNumbers());
+  const [answer, setAnswer] = React.useState(getNumbers); // lazy init.
   const inputRef = React.useRef(null);
 
   const handleSubmit = (e) => {
@@ -61,8 +61,7 @@ const NumberBaseball = () => {
     setResult('');
   }
 
-  const buttonDisabledState =
-    inputValue.length !== 4 ? 'disabled' : '';
+  const buttonDisabledState = inputValue.length !== 4;
 
   return (
     <>
@@ -72,7 +71,7 @@ const NumberBaseball = () => {
                onChange={handleChangeInput}/>
         <button type='submit' disabled={buttonDisabledState}>SUBMIT</button>
       </form>
-      <Try tries={tries}/>
+      <Try tryInfo={tries}/>
     </>
   );
 }

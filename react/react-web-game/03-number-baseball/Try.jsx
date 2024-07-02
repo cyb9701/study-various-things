@@ -2,13 +2,13 @@ import React from 'react';
 import TryItem from "./TryItem";
 
 const Try = (props) => {
-  const {tries} = props;
+  const {tryInfo} = props;
 
   return (
     <>
-      <h4>TRY: {tries.length}</h4>
+      <h4>TRY: {tryInfo.length}</h4>
       <ul>
-        {tries.map((value, index) => {
+        {tryInfo.map((value, index) => {
           return <TryItem key={index} tries={value} index={index}/>;
         })}
       </ul>
