@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import Try from "./Try";
 
 let getNumbers = () => {
@@ -16,11 +16,11 @@ let getNumbers = () => {
 }
 
 const NumberBaseball = () => {
-  const [result, setResult] = React.useState('');
-  const [inputValue, setInputValue] = React.useState('');
-  const [tries, setTries] = React.useState([]);
-  const [answer, setAnswer] = React.useState(getNumbers); // lazy init.
-  const inputRef = React.useRef(null);
+  const [result, setResult] = useState('');
+  const [inputValue, setInputValue] = useState('');
+  const [tries, setTries] = useState([]);
+  const [answer, setAnswer] = useState(getNumbers); // lazy init.
+  const inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -2,13 +2,13 @@ import React, {memo} from 'react';
 import TryItem from "./TryItem";
 
 const Try = memo((props) => {
-  const {tryInfo} = props;
+  const {tryInfo: values} = props;
 
   return (
     <>
-      <h4>TRY: {tryInfo.length}</h4>
+      <h4>TRY: {values.length}</h4>
       <ul>
-        {tryInfo.map((value, index) => {
+        {values.map((value, index) => {
           return <TryItem key={index} tries={value} index={index}/>;
         })}
       </ul>
