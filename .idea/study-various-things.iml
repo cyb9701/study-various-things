@@ -2,7 +2,35 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/image-search-app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/image-search-app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/image-search-app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/clean-architecture/note-app/ios/.symlinks/plugins/sqflite/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/app/ios/.symlinks/plugins/path_provider_foundation/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/go-router-playground/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/go-router-playground/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/go-router-playground/build" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/rivderpod-playround/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/rivderpod-playround/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/flutter/practical-skills/rivderpod-playround/build" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
