@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import Ball from "./Ball";
 
 const getLottoNumbers = () => {
   const candidate = Array(45).fill(0).map((v, i) => i + 1);
@@ -57,11 +58,11 @@ const Lotto = () => {
     <>
       <div>당첨 번호</div>
       {
-        lottoBalls.length !== 0 && lottoBalls.map((e) => <div key={e}>{e}</div>)
+        lottoBalls.length !== 0 && lottoBalls.map((e) => <Ball number={e}/>)
       }
       <div>보너스</div>
       {
-        bonusBall && <div>{bonusBall}</div>
+        bonusBall && <Ball number={bonusBall}/>
       }
       {
         reload && <button onClick={handleClickButton}>reload</button>
