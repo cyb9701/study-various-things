@@ -1,7 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Ball from "./Ball";
 
 const getLottoNumbers = () => {
+  console.log('🍀Lotto.jsx:5🍀', 'getLottoNumbers');
   const candidate = Array(45).fill(0).map((v, i) => i + 1);
   const shuffle = [];
 
@@ -21,6 +22,8 @@ const getLottoNumbers = () => {
 
 const Lotto = () => {
   const [lottoNumbers, setLottoNumbers] = useState(getLottoNumbers);
+  // const values = useMemo(() => getLottoNumbers(), []);
+  // const [lottoNumbers, setLottoNumbers] = useState(values);
   const [lottoBalls, setLottoBalls] = useState([]);
   const [bonusBall, setBonusBall] = useState(null);
   const [reload, setReload] = useState(false);
@@ -46,19 +49,27 @@ const Lotto = () => {
     };
   }, [timeOuts.current]);
 
-  const handleClickButton = () => {
+
+  /**
+   * useRef: 일반 값을 기억한다.
+   * useMemo: 복잡한 함수의 결과 값을 기억한다.
+   * useCallback: 함수를 기억한다.
+   *
+   * useCallback은 함수 생성 자체가 너무 오래 걸린다고 했을 때, 함수를 기억한다.
+   */
+  const handleClickButton = useCallback(() => {
     setLottoNumbers(getLottoNumbers());
     setLottoBalls([]);
     setBonusBall(null);
     setReload(false);
     timeOuts.current = [];
-  }
+  }, []);
 
   return (
     <>
       <div>당첨 번호</div>
       {
-        lottoBalls.length !== 0 && lottoBalls.map((e) => <Ball number={e}/>)
+        lottoBalls.length !== 0 && lottoBalls.map((e) => <Ball key={e} number={e}/>)
       }
       <div>보너스</div>
       {
