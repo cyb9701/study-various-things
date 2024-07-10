@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 const getLottoNumbers = () => {
   const candidate = Array(45).fill(0).map((v, i) => i + 1);
@@ -23,31 +23,34 @@ const Lotto = () => {
   const [lottoBalls, setLottoBalls] = useState([]);
   const [bonusBall, setBonusBall] = useState(null);
   const [reload, setReload] = useState(false);
+  const timeOuts = useRef([]);
 
   useEffect(() => {
-    let intervalId;
-
-    if (lottoNumbers.length === 1) {
-      intervalId = setInterval(() => {
-        setBonusBall(lottoNumbers[0]);
-        setLottoNumbers([]);
-      }, 1000);
-    } else {
-      const number = lottoNumbers.splice(0, 1)[0];
-      intervalId = setInterval(() => {
-        setLottoBalls((prevState) => {
-          return [...prevState, number];
-        });
-      }, 1000);
+    for (let i = 0; i < lottoNumbers.length; i++) {
+      timeOuts.current[i] = setTimeout(() => {
+        if (i !== lottoNumbers.length - 1) {
+          setLottoBalls((prevState) => {
+            return [...prevState, lottoNumbers[i]];
+          })
+        } else {
+          setBonusBall(lottoNumbers[i]);
+          setReload(true);
+        }
+      }, (i + 1) * 1000);
     }
-
-    return () => clearInterval(intervalId);
-  }, [lottoBalls]);
+    return () => {
+      timeOuts.current.forEach((e) => {
+        clearTimeout(e);
+      })
+    };
+  }, [timeOuts.current]);
 
   const handleClickButton = () => {
     setLottoNumbers(getLottoNumbers());
     setLottoBalls([]);
     setBonusBall(null);
+    setReload(false);
+    timeOuts.current = [];
   }
 
   return (
@@ -61,7 +64,7 @@ const Lotto = () => {
         bonusBall && <div>{bonusBall}</div>
       }
       {
-        lottoNumbers.length === 0 && <button onClick={handleClickButton}>reload</button>
+        reload && <button onClick={handleClickButton}>reload</button>
       }
     </>
   );
