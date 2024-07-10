@@ -54,8 +54,9 @@ const Lotto = () => {
    * useRef: 일반 값을 기억한다.
    * useMemo: 복잡한 함수의 결과 값을 기억한다.
    * useCallback: 함수를 기억한다.
-   *
-   * useCallback은 함수 생성 자체가 너무 오래 걸린다고 했을 때, 함수를 기억한다.
+   *    함수 생성 자체가 너무 오래 걸린다고 했을 때, 함수를 기억한다.
+   *    함수 안에서 useState의 값을 사용할 경우, useState 값이 변경해도 첫번째 값을 계속 기억하는 문제가 있다.
+   *    그렇기 때문에 의존성 배열에 추가해야 한다.
    */
   const handleClickButton = useCallback(() => {
     setLottoNumbers(getLottoNumbers());
