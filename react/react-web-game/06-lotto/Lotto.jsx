@@ -57,6 +57,7 @@ const Lotto = () => {
    *    함수 생성 자체가 너무 오래 걸린다고 했을 때, 함수를 기억한다.
    *    함수 안에서 useState의 값을 사용할 경우, useState 값이 변경해도 첫번째 값을 계속 기억하는 문제가 있다.
    *    그렇기 때문에 의존성 배열에 추가해야 한다.
+   *    자식 컴포넌트에 함수를 전달해줄 경우, useCallback 함수를 전달해도 좋다.
    */
   const handleClickButton = useCallback(() => {
     setLottoNumbers(getLottoNumbers());
