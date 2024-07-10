@@ -1,4 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
+import useInterval from "./useInterval";
 
 const respCoords = {
   'r': '0',
@@ -11,8 +12,6 @@ const Rsp = () => {
   const [imageCoords, setImageCoords] = useState(respCoords.r);
   const [score, setScore] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
-  const interval = useRef(null);
-
 
   const handleChangeImageCoords = () => {
     if (!isRunning) {
@@ -68,17 +67,20 @@ const Rsp = () => {
     }
   }
 
-  useEffect(() => {
-    interval.current = setInterval(
-      handleChangeImageCoords,
-      100,
-    );
-
-    return () => {
-      clearInterval(interval.current);
-    }
-  }, [imageCoords, isRunning]);
-
+  useInterval(
+    handleChangeImageCoords,
+    isRunning ? 100 : null,
+  );
+  // useEffect(() => {
+  //   interval.current = setInterval(
+  //     handleChangeImageCoords,
+  //     100,
+  //   );
+  //
+  //   return () => {
+  //     clearInterval(interval.current);
+  //   }
+  // }, [imageCoords, isRunning]);
 
   return (
     <>
