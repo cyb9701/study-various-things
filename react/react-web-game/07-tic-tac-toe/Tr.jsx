@@ -1,13 +1,19 @@
 import React, { memo } from 'react';
 import Td from './Td';
 
-const Tr = memo(({ rowData }) => {
+const Tr = memo(({ dispatch, rowData, rowIndex }) => {
   return (
     <tr>
       {Array(rowData.length)
         .fill()
-        .map((td, i) => (
-          <Td key={i} cellData={rowData[i]}>
+        .map((_, i) => (
+          <Td
+            key={i}
+            dispatch={dispatch}
+            rowIndex={rowIndex}
+            cellIndex={i}
+            cellData={rowData[i]}
+          >
             {''}
           </Td>
         ))}
