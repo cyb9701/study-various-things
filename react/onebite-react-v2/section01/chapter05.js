@@ -7,7 +7,7 @@ console.log('🍀chapter05:6🍀', num1 + num2);
 console.log('🍀chapter05:7🍀', num1 - num2);
 console.log('🍀chapter05:8🍀', num1 * num2);
 console.log('🍀chapter05:9🍀', num1 / num2);
-console.log('🍀chapter05:10🍀', num1 % num2); // 모듈러 연산.
+console.log('🍀chapter05:10🍀', num1 % num2); // 모듈러 연산자.
 
 let inf = Infinity;
 let mInf = -Infinity;
