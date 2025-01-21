@@ -1,24 +1,27 @@
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Button from './component/Button';
+import Header from './component/Header';
 import Diary from './page/Diary';
 import Home from './page/Home';
 import New from './page/New';
 import NotFound from './page/NotFound';
-import getEmotionImage from './util/get-emotion-image';
 
 function App() {
-  const nav = useNavigate();
+  // const nav = useNavigate();
 
-  const handleClick = () => {
-    nav('/new');
-  };
+  // const handleClick = () => {
+  //   nav('/new');
+  // };
 
   return (
     <>
-      <div>
-        <img src={getEmotionImage(1)} />
-      </div>
-      <button onClick={handleClick}>New 페이지로 이동</button>
+      <Header
+        title='header'
+        leftChild={<Button text='left' />}
+        rightChild={<Button text='right' />}
+      />
+      {/* <button onClick={handleClick}>New 페이지로 이동</button>
       <div>
         <Link to={'/'}>Home</Link>
         <Link to={'/new'}>New</Link>
@@ -28,8 +31,7 @@ function App() {
         <a href='/'>Home</a>
         <a href='/new'>New</a>
         <a href='/diary'>Diary</a>
-      </div>
-
+      </div> */}
       <Routes>
         <Route index element={<Home />} />
         <Route path='new' element={<New />} />
