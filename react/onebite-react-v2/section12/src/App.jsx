@@ -4,6 +4,7 @@ import Diary from './page/Diary';
 import Home from './page/Home';
 import New from './page/New';
 import NotFound from './page/NotFound';
+import getEmotionImage from './util/get-emotion-image';
 
 function App() {
   const nav = useNavigate();
@@ -14,6 +15,9 @@ function App() {
 
   return (
     <>
+      <div>
+        <img src={getEmotionImage(1)} />
+      </div>
       <button onClick={handleClick}>New 페이지로 이동</button>
       <div>
         <Link to={'/'}>Home</Link>
