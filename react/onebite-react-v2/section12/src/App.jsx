@@ -1,26 +1,85 @@
+import { createContext, useReducer, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import Button from './component/Button';
-import Header from './component/Header';
 import Diary from './page/Diary';
+import Edit from './page/Edit';
 import Home from './page/Home';
 import New from './page/New';
 import NotFound from './page/NotFound';
 
-function App() {
-  // const nav = useNavigate();
+const mockData = [
+  {
+    id: 1,
+    createdDate: new Date().getTime(),
+    emotionId: 1,
+    content: '1번 내용',
+  },
+  {
+    id: 2,
+    createDate: new Date().getTime(),
+    emotionId: 4,
+    content: '2번 내용',
+  },
+];
 
-  // const handleClick = () => {
-  //   nav('/new');
-  // };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'CREATE':
+      return [...state, action.data];
+
+    case 'UPDATE':
+      return state.map((item) =>
+        item.id == action.data.id ? action.data : item
+      );
+
+    case 'DELETE':
+      console.log('🍀App:36🍀', action.data);
+      return state.filter((item) => item.id != action.data);
+  }
+};
+
+const DiaryStateContext = createContext();
+
+const DiaryDispatchContext = createContext();
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, mockData);
+
+  const idRef = useRef(3);
+
+  const handleCreate = (createdDate, emotionId, content) => {
+    dispatch({
+      type: 'CREATE',
+      data: {
+        id: idRef.current++,
+        createdDate,
+        emotionId,
+        content,
+      },
+    });
+  };
+
+  const handleEdit = (id, createdDate, emotionId, content) => {
+    dispatch({
+      type: 'UPDATE',
+      data: {
+        id: id,
+        createdDate,
+        emotionId,
+        content,
+      },
+    });
+  };
+
+  const handleDelete = (id) => {
+    dispatch({
+      type: 'DELETE',
+      data: id,
+    });
+  };
 
   return (
     <>
-      <Header
-        title='header'
-        leftChild={<Button text='left' />}
-        rightChild={<Button text='right' />}
-      />
       {/* <button onClick={handleClick}>New 페이지로 이동</button>
       <div>
         <Link to={'/'}>Home</Link>
@@ -32,12 +91,23 @@ function App() {
         <a href='/new'>New</a>
         <a href='/diary'>Diary</a>
       </div> */}
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path='new' element={<New />} />
-        <Route path='diary/:id' element={<Diary />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      <DiaryStateContext.Provider value={state}>
+        <DiaryDispatchContext.Provider
+          value={{
+            handleCreate,
+            handleEdit,
+            handleDelete,
+          }}
+        >
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path='new' element={<New />} />
+            <Route path='edit/:id' element={<Edit />} />
+            <Route path='diary/:id' element={<Diary />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </DiaryDispatchContext.Provider>
+      </DiaryStateContext.Provider>
     </>
   );
 }

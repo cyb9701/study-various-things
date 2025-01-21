@@ -15,7 +15,7 @@ const getEmotionImage = (emotionId) => {
       return emotion3;
     case 4:
       return emotion4;
-    case 5:
+    default:
       return emotion5;
   }
 };
