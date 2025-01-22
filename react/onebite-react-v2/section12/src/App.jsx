@@ -16,9 +16,15 @@ const mockData = [
   },
   {
     id: 2,
-    createDate: new Date().getTime(),
+    createdDate: new Date('2025-2-1').getTime(),
     emotionId: 4,
     content: '2번 내용',
+  },
+  {
+    id: 3,
+    createdDate: new Date('2025-1-1').getTime(),
+    emotionId: 3,
+    content: '3번 내용',
   },
 ];
 
@@ -33,19 +39,18 @@ const reducer = (state, action) => {
       );
 
     case 'DELETE':
-      console.log('🍀App:36🍀', action.data);
       return state.filter((item) => item.id != action.data);
   }
 };
 
-const DiaryStateContext = createContext();
+export const DiaryStateContext = createContext();
 
-const DiaryDispatchContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
   const [state, dispatch] = useReducer(reducer, mockData);
 
-  const idRef = useRef(3);
+  const idRef = useRef(4);
 
   const handleCreate = (createdDate, emotionId, content) => {
     dispatch({
