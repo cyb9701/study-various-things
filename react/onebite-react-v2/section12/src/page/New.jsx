@@ -11,8 +11,6 @@ const New = () => {
   const dispatch = useContext(DiaryDispatchContext);
 
   const handleSubmit = (input) => {
-    if (!input.content) return;
-
     dispatch.handleCreate(
       input.createdDate.getTime(),
       input.emotionId,
