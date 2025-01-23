@@ -3,6 +3,7 @@ import Button from '../component/Button';
 import Header from '../component/Header';
 import Viewer from '../component/Viewer';
 import useDiary from '../hook/useDiary';
+import usePageTitle from '../hook/usePageTitle';
 import { getStringedDate } from '../util/get_stringed-date';
 
 const Diary = () => {
@@ -11,6 +12,8 @@ const Diary = () => {
   const nav = useNavigate();
 
   const currentDiaryItem = useDiary(id);
+
+  usePageTitle(`${id}번 일기`);
 
   if (!currentDiaryItem) {
     return <></>;

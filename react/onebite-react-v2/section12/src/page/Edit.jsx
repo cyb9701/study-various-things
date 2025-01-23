@@ -5,6 +5,7 @@ import Button from '../component/Button';
 import Editor from '../component/Editor';
 import Header from '../component/Header';
 import useDiary from '../hook/useDiary';
+import usePageTitle from '../hook/usePageTitle';
 
 const Edit = () => {
   const { id } = useParams();
@@ -14,6 +15,8 @@ const Edit = () => {
   const nav = useNavigate();
 
   const currentDiaryItem = useDiary(id);
+
+  usePageTitle(`${id}번 일기 수정`);
 
   const handleDelete = () => {
     const result = window.confirm(
