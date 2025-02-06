@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import ProgressIndicator from './component/ProgressIndicator';
-import QuestionBox from './component/QuestionBox';
+import { Route, Routes } from 'react-router';
+import PageA from './page/PageA';
+import PageB from './page/PageB';
 
 function App() {
   const questions = [
@@ -41,14 +42,18 @@ function App() {
 
   return (
     <>
-      <ProgressIndicator />
+      <Routes>
+        <Route path='/' element={<PageA />} />
+        <Route path='/2' element={<PageB />} />
+      </Routes>
+      {/* <ProgressIndicator />
       <QuestionBox
         question={questions[step]}
         questionsLength={questions.length}
         step={step}
         answer={answers[step]}
         updateAnswer={handleUpdateAnswer}
-      />
+      /> */}
     </>
   );
 }
