@@ -1,5 +1,5 @@
 const ProgressIndicator = () => {
-  return <>p</>;
+  return <div>p</div>;
 };
 
 export default ProgressIndicator;

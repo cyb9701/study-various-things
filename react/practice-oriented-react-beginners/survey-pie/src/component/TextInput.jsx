@@ -22,6 +22,7 @@ const Input = styled.input`
   font-size: 18px;
   line-height: 21px;
   padding: 12px 18px;
+  width: 100%;
 `;
 
 export default TextInput;
