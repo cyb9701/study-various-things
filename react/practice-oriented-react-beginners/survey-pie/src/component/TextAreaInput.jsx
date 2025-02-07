@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TextInput = ({ answer, updateAnswer, options }) => {
+const TextAreaInput = ({ answer, updateAnswer, options }) => {
   const handleChange = (e) => {
     updateAnswer(e.target.value);
   };
@@ -22,6 +22,8 @@ const Input = styled.input`
   font-size: 18px;
   line-height: 21px;
   padding: 12px 18px;
+  height: 196px;
+  resize: none;
 `;
 
-export default TextInput;
+export default TextAreaInput;

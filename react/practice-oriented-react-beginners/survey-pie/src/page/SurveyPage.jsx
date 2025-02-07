@@ -14,21 +14,27 @@ const SurveyPage = () => {
       description: '설명1',
       type: 'text',
       required: false,
-      options: {},
+      options: {
+        placeholder: '10자 이내로 단답해주세요',
+      },
     },
     {
       title: '질문2',
       description: '설명2',
-      type: 'text',
+      type: 'textarea',
       required: false,
-      options: {},
+      options: {
+        placeholder: '400자 이내로 답해주세요',
+      },
     },
     {
       title: '질문3',
       description: '설명3',
-      type: 'text',
+      type: 'select',
       required: false,
-      options: {},
+      options: {
+        items: ['1', '2', '3', '4'],
+      },
     },
   ];
 
