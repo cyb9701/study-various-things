@@ -11,6 +11,10 @@ const QuestionBox = () => {
 
   const [answer, setAnswer] = useCurrentAnswer();
 
+  const handleUpdateAnswer = (value) => {
+    setAnswer(value);
+  };
+
   return (
     <QuestionBoxWrapper>
       <Title>{question.title}</Title>
@@ -18,7 +22,7 @@ const QuestionBox = () => {
       <Body
         type={question.type}
         answer={answer}
-        updateAnswer={setAnswer}
+        updateAnswer={handleUpdateAnswer}
         options={question.options}
       />
       <ActionButtons />

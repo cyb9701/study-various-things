@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CompletionPage = () => {
   axios
-    .get('http://localhost:5173/')
+    .get('http://localhost:3001/surveys')
     .then((response) => {
       console.log('🍀CompletionPage:8🍀', response.data);
     })

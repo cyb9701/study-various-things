@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import useCurrentStep from '../hook/useCurrentStep';
-import questionsLengthSelector from '../store/question/questionsLengthSelector';
+import useAnswers from '../hook/useAnswers';
+import useStep from '../hook/useStep';
+import useSurveyId from '../hook/useSurveyId';
+import postAnswers from '../service/postAnswers';
+import questionsLengthSelector from '../store/survey/questionsLengthSelector';
 import Button from './Button';
 
 const ActionButtons = () => {
@@ -10,7 +13,11 @@ const ActionButtons = () => {
 
   const questionsLength = useRecoilValue(questionsLengthSelector);
 
-  const step = useCurrentStep();
+  const [answers, setAnswers] = useAnswers();
+
+  const step = useStep();
+
+  const surveyId = useSurveyId();
 
   const isLast = questionsLength - 1 === step;
 
@@ -34,6 +41,8 @@ const ActionButtons = () => {
         <Button
           type='PRIMARY'
           onClick={() => {
+            postAnswers(surveyId, answers);
+
             navigate('/done');
           }}
         >

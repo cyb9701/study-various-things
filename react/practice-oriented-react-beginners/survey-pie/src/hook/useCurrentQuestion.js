@@ -1,11 +1,13 @@
 import { useRecoilValue } from 'recoil';
-import questionsAtom from '../store/question/questionsAtom';
-import useCurrentStep from './useCurrentStep';
+import surveySelector from '../store/survey/surveySelector';
+import useStep from './useStep';
 
 const useCurrentQuestion = () => {
-  const step = useCurrentStep();
+  const step = useStep();
 
-  const questions = useRecoilValue(questionsAtom);
+  const survey = useRecoilValue(surveySelector);
+
+  const questions = survey?.questions ?? [];
 
   const question = questions[step];
 

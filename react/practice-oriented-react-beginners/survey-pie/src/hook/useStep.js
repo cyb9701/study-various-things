@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 
-const useCurrentStep = () => {
+const useStep = () => {
   const params = useParams();
 
   const step = parseInt(params.step);
@@ -8,4 +8,4 @@ const useCurrentStep = () => {
   return step;
 };
 
-export default useCurrentStep;
+export default useStep;
