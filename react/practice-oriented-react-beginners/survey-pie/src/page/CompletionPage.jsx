@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const CompletionPage = () => {
-  return <CompletionPageWrapper>CompletionPage</CompletionPageWrapper>;
+  return <CompletionPageWrapper>aaa</CompletionPageWrapper>;
 };
 
 const CompletionPageWrapper = styled.div`

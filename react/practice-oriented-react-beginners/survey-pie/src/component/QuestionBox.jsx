@@ -1,16 +1,16 @@
 import styled from 'styled-components';
+import useCurrentAnswer from '../hook/useCurrentAnswer';
+import useCurrentQuestion from '../hook/useCurrentQuestion';
 import ActionButtons from './ActionButtons';
 import Body from './Body';
 import Description from './Description';
 import Title from './Title';
 
-const QuestionBox = ({
-  question,
-  questionsLength,
-  step,
-  answer,
-  updateAnswer,
-}) => {
+const QuestionBox = () => {
+  const question = useCurrentQuestion();
+
+  const [answer, setAnswer] = useCurrentAnswer();
+
   return (
     <QuestionBoxWrapper>
       <Title>{question.title}</Title>
@@ -18,10 +18,10 @@ const QuestionBox = ({
       <Body
         type={question.type}
         answer={answer}
-        updateAnswer={updateAnswer}
+        updateAnswer={setAnswer}
         options={question.options}
       />
-      <ActionButtons questionsLength={questionsLength} step={step} />
+      <ActionButtons />
     </QuestionBoxWrapper>
   );
 };
