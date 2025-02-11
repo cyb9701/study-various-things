@@ -1,7 +1,7 @@
 import mainApi from './api/mainApi';
 
 const postAnswers = (surveyId, data) => {
-  mainApi.post('/answers', {
+  return mainApi.post('/answers', {
     surveyId,
     data,
   });

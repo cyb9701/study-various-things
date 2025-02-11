@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 const SelectInput = ({ answer = [], updateAnswer, options }) => {
   const handleChange = (e, index) => {
+    if ((options.max || 1) <= answer.length) {
+      return;
+    }
+
     const isChecked = e.target.checked;
 
     let newValues = [...answer];
@@ -19,7 +23,11 @@ const SelectInput = ({ answer = [], updateAnswer, options }) => {
     <SelectItemWrapper>
       {options.items.map((item, index) => {
         return (
-          <Item key={index} onChange={(e) => handleChange(e, index)}>
+          <Item
+            key={index}
+            checked={answer.includes(index)}
+            onChange={(e) => handleChange(e, index)}
+          >
             {item}
           </Item>
         );
@@ -34,11 +42,11 @@ const SelectItemWrapper = styled.div`
   gap: 20px;
 `;
 
-const Item = ({ children, onChange }) => {
+const Item = ({ children, checked, onChange }) => {
   return (
     <ItemWrapper>
       <label>
-        <input type='checkbox' onChange={onChange} />
+        <input type='checkbox' checked={checked} onChange={onChange} />
         <span />
         <div>{children}</div>
       </label>

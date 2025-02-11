@@ -11,7 +11,7 @@ function App() {
           <Route path='/survey/:surveyId' element={<SurveyPage />}>
             <Route path=':step' element={<SurveyPage />} />
           </Route>
-          <Route path='/done' element={<CompletionPage />} />
+          <Route path='/done/:surveyId' element={<CompletionPage />} />
         </Routes>
       </Box>
     </AppWrapper>
@@ -29,7 +29,7 @@ const AppWrapper = styled.div`
 const Box = styled.div`
   width: 700px;
   min-height: 500px;
-  background-color: #ffffff;
+  background: #ffffff;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.07);
   border-radius: 16px;
   padding: 60px;

@@ -8,9 +8,11 @@ const TextInput = ({ answer, updateAnswer, options }) => {
   return (
     <Input
       type='text'
-      value={answer}
+      value={answer || ''}
       onChange={handleChange}
       placeholder={options.placeholder}
+      maxLength={options?.max}
+      {...(options?.max && { maxLength: options?.max })}
     />
   );
 };

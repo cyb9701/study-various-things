@@ -8,9 +8,10 @@ const TextAreaInput = ({ answer, updateAnswer, options }) => {
   return (
     <Input
       type='text'
-      value={answer}
+      value={answer || ''}
       onChange={handleChange}
       placeholder={options.placeholder}
+      maxLength={options?.max}
     />
   );
 };

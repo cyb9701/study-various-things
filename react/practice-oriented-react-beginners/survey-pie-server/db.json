@@ -21108,6 +21108,79 @@
         "sdfsdf"
       ],
       "id": 1000
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        [
+          0,
+          4,
+          1
+        ],
+        "sssssdfsdf",
+        "123123"
+      ],
+      "id": 1001
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        [
+          1
+        ],
+        "aa",
+        "bb"
+      ],
+      "id": 1002
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        [
+          2
+        ],
+        "sdfsdfdsfsdfdsfsdfdsfdsfdsfdfsdf",
+        "aa"
+      ],
+      "id": 1003
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        null,
+        null,
+        "sd"
+      ],
+      "id": 1004
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        null,
+        null,
+        "sdf"
+      ],
+      "id": 1005
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        [
+          2
+        ],
+        "fghfgh",
+        "fghfgh"
+      ],
+      "id": 1006
+    },
+    {
+      "surveyId": 1,
+      "data": [
+        null,
+        null,
+        "sdfsdf"
+      ],
+      "id": 1007
     }
   ]
 }
