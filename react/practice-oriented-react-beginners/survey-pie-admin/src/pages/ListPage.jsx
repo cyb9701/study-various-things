@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import useSWR from 'swr';
-import MainLayout from '../layout/MainLayout';
+import MainLayout from '../layouts/MainLayout';
 import fetcher from '../lib/fecter';
 
 const columns = [
