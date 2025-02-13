@@ -23,7 +23,7 @@ const PreviewSection = ({
           <Body type={e.type} options={e.options} />
         </Card>
       ))}
-      <AddButton onClick={onAddButtonClicked} />
+      <AddButton addQuestion={onAddButtonClicked} />
     </>
   );
 };
