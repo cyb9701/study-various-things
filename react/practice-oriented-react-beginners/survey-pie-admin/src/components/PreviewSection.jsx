@@ -1,14 +1,19 @@
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addQuestion,
+  deleteQuestion,
+  moveDownQuestion,
+  moveUpQuestion,
+} from '../stores/survey/surveySlice';
 import AddButton from './AddButton';
 import Body from './Boyd';
 import Card from './Card';
 
-const PreviewSection = ({
-  questions,
-  onAddButtonClicked,
-  onUpButtonClicked,
-  onDownButtonClicked,
-  onDeleteButtonClicked,
-}) => {
+const PreviewSection = () => {
+  const dispatch = useDispatch();
+
+  const questions = useSelector((state) => state.survey.data?.questions || []);
+
   return (
     <>
       {questions.map((e, index) => (
@@ -16,14 +21,14 @@ const PreviewSection = ({
           key={index}
           title={e.title}
           desc={e.desc}
-          onUpButtonClicked={() => onUpButtonClicked(index)}
-          onDownButtonClicked={() => onDownButtonClicked(index)}
-          onDeleteButtonClicked={() => onDeleteButtonClicked(index)}
+          onUpButtonClicked={(index) => dispatch(moveUpQuestion(index))}
+          onDownButtonClicked={(index) => dispatch(moveDownQuestion(index))}
+          onDeleteButtonClicked={(index) => dispatch(deleteQuestion(index))}
         >
           <Body type={e.type} options={e.options} />
         </Card>
       ))}
-      <AddButton addQuestion={onAddButtonClicked} />
+      <AddButton addQuestion={(type) => dispatch(addQuestion(type))} />
     </>
   );
 };
