@@ -12,7 +12,11 @@ import Card from './Card';
 const PreviewSection = () => {
   const dispatch = useDispatch();
 
-  const questions = useSelector((state) => state.survey.data?.questions || []);
+  const questions = useSelector((state) => state.survey.data?.questions);
+
+  if (!questions) {
+    return <></>;
+  }
 
   return (
     <>
@@ -21,9 +25,9 @@ const PreviewSection = () => {
           key={index}
           title={e.title}
           desc={e.desc}
-          onUpButtonClicked={(index) => dispatch(moveUpQuestion(index))}
-          onDownButtonClicked={(index) => dispatch(moveDownQuestion(index))}
-          onDeleteButtonClicked={(index) => dispatch(deleteQuestion(index))}
+          onUpButtonClicked={() => dispatch(moveUpQuestion(index))}
+          onDownButtonClicked={() => dispatch(moveDownQuestion(index))}
+          onDeleteButtonClicked={() => dispatch(deleteQuestion(index))}
         >
           <Body type={e.type} options={e.options} />
         </Card>
