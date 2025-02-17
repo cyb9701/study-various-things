@@ -1,5 +1,5 @@
-import SelectInput from './SelectInput';
-import TextAreaInput from './TextAreaInput';
+import SelectInput from './SelectInput.jsx';
+import TextAreaInput from './TextAreaInput.jsx';
 import TextInput from './TextInput.jsx';
 
 const Body = ({ type, options }) => {
@@ -17,6 +17,9 @@ const Body = ({ type, options }) => {
     case 'select':
       Component = SelectInput;
       break;
+
+    default:
+      return null;
   }
 
   return <Component options={options} />;

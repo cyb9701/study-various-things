@@ -70,6 +70,10 @@ export const surveySlice = createSlice({
     deleteQuestion: (state, action) => {
       state.data.questions.splice(action.payload, 1);
     },
+    setQuestion: (state, action) => {
+      const { index, data } = action.payload;
+      state.data.questions[index] = data;
+    },
   },
 });
 
@@ -82,6 +86,7 @@ export const {
   moveUpQuestion,
   moveDownQuestion,
   deleteQuestion,
+  setQuestion,
 } = surveySlice.actions;
 
 export default surveySlice.reducer;

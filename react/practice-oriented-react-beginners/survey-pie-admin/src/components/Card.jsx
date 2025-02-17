@@ -9,9 +9,11 @@ const Card = ({
   onUpButtonClicked,
   onDownButtonClicked,
   onDeleteButtonClicked,
+  onClick,
+  isSelected,
 }) => {
   return (
-    <CardWrapper>
+    <CardWrapper $isSelected={isSelected} onClick={onClick}>
       <Head>
         <Title>{title}</Title>
         <Desc>{desc}</Desc>
@@ -56,7 +58,8 @@ const ButtonGroup = styled.div`
 `;
 
 const CardWrapper = styled.div`
-  border: 1px solid #dddddd;
+  border: ${({ $isSelected }) =>
+    $isSelected ? '3px solid blue' : '1px solid #dddddd'};
   width: 400px;
   margin: 30px auto;
   background: #ffffff;

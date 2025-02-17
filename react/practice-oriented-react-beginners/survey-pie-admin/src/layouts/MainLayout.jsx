@@ -4,7 +4,7 @@ import Sider from 'antd/es/layout/Sider';
 import { useNavigate } from 'react-router';
 import './MainLayout.css';
 
-const MainLayout = ({ selectedKeys, children }) => {
+const MainLayout = ({ selectedKeys, children, padding = 45 }) => {
   const navigate = useNavigate();
 
   function getItem(key, label) {
@@ -36,7 +36,9 @@ const MainLayout = ({ selectedKeys, children }) => {
       </Sider>
       <Layout>
         <Header />
-        <Content className='content'>{children}</Content>
+        <Content className='content' style={{ padding }}>
+          {children}
+        </Content>
       </Layout>
     </Layout>
   );
